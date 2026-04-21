@@ -1,0 +1,254 @@
+# Observations for series ONS-GDP-DEFLATOR
+# HM Treasury GDP deflator at market prices, annual outturn, fiscal years 1955-56 to 2024-25
+# Each entry maps to one row in pda_shared.external_observations
+
+series_code: ONS-GDP-DEFLATOR
+unit: index_reference_year_varies
+frequency: annual
+observation_date_convention: end-of-fiscal-year
+index_base_year_at_load: "2024-25 = 100"
+
+source:
+  publication: "HMT GDP Deflators at market prices, and money GDP (Quarterly National Accounts update, March 2026)"
+  release_date: 2026-03-31
+  workbook: GDP_Deflators_Qtrly_National_Accounts_March_2026_update.xlsx
+  workbook_url: "https://assets.publishing.service.gov.uk/media/69cbaf242d120d9d5ec0f2fd/GDP_Deflators_Qtrly_National_Accounts_March_2026_update.xlsx"
+  publication_page: "https://www.gov.uk/government/statistics/gdp-deflators-at-market-prices-and-money-gdp-march-2026-quarterly-national-accounts"
+  collection_page: "https://www.gov.uk/government/collections/gdp-deflators-at-market-prices-and-money-gdp"
+  sheet: "31032026 deflator update"
+  column: "GDP deflator at market prices, 2024-25 = 100"
+  outturn_upstream: "ONS Quarterly National Accounts"
+
+rebase_caveat: >
+  HMT rebases this deflator on every release. Values here are stored at load
+  time with the 2024-25 = 100 base. Any analysis against these values must
+  confirm the current base year at the time of use, because HMT rebases on
+  every release and values here will become out of date as new releases
+  happen. The simplest check is to fetch the current HMT release and
+  compare the 2024-25 index value to 100; if different, a rebasing has
+  occurred and the load should be refreshed as a new append-only entry.
+
+scope_note: >
+  70 outturn annual rows loaded, fiscal years 1955-56 through 2024-25.
+  The 6 forecast rows in the workbook (2025-26 through 2030-31) carry
+  a dash "-" in the deflator index column because the HMT workbook
+  only publishes forecast money GDP (from OBR EFO Spring Statement
+  3 March 2026), not a forecast deflator index. Forecasts not loaded
+  here; if needed, load under OBR-EFO-2026-03 or a successor series.
+
+role_in_investigation: >
+  Ancillary sanity-check series for the construction cost reprice
+  (methodology.md section 6.1, caveat 1). Not the primary reprice basis;
+  that role is filled by ONS-OPI-INFRA-NEW.
+
+observations:
+  - observation_date: 1956-03-31
+    value: 3.1645
+    fiscal_year: "1955-56"
+  - observation_date: 1957-03-31
+    value: 3.3593
+    fiscal_year: "1956-57"
+  - observation_date: 1958-03-31
+    value: 3.5142
+    fiscal_year: "1957-58"
+  - observation_date: 1959-03-31
+    value: 3.5995
+    fiscal_year: "1958-59"
+  - observation_date: 1960-03-31
+    value: 3.6187
+    fiscal_year: "1959-60"
+  - observation_date: 1961-03-31
+    value: 3.6909
+    fiscal_year: "1960-61"
+  - observation_date: 1962-03-31
+    value: 3.8264
+    fiscal_year: "1961-62"
+  - observation_date: 1963-03-31
+    value: 3.9457
+    fiscal_year: "1962-63"
+  - observation_date: 1964-03-31
+    value: 4.0121
+    fiscal_year: "1963-64"
+  - observation_date: 1965-03-31
+    value: 4.201
+    fiscal_year: "1964-65"
+  - observation_date: 1966-03-31
+    value: 4.4272
+    fiscal_year: "1965-66"
+  - observation_date: 1967-03-31
+    value: 4.6525
+    fiscal_year: "1966-67"
+  - observation_date: 1968-03-31
+    value: 4.7796
+    fiscal_year: "1967-68"
+  - observation_date: 1969-03-31
+    value: 5.0299
+    fiscal_year: "1968-69"
+  - observation_date: 1970-03-31
+    value: 5.3774
+    fiscal_year: "1969-70"
+  - observation_date: 1971-03-31
+    value: 5.9079
+    fiscal_year: "1970-71"
+  - observation_date: 1972-03-31
+    value: 6.3551
+    fiscal_year: "1971-72"
+  - observation_date: 1973-03-31
+    value: 6.8955
+    fiscal_year: "1972-73"
+  - observation_date: 1974-03-31
+    value: 7.5015
+    fiscal_year: "1973-74"
+  - observation_date: 1975-03-31
+    value: 9.0263
+    fiscal_year: "1974-75"
+  - observation_date: 1976-03-31
+    value: 11.2333
+    fiscal_year: "1975-76"
+  - observation_date: 1977-03-31
+    value: 12.8005
+    fiscal_year: "1976-77"
+  - observation_date: 1978-03-31
+    value: 14.5596
+    fiscal_year: "1977-78"
+  - observation_date: 1979-03-31
+    value: 16.1988
+    fiscal_year: "1978-79"
+  - observation_date: 1980-03-31
+    value: 18.9324
+    fiscal_year: "1979-80"
+  - observation_date: 1981-03-31
+    value: 22.5457
+    fiscal_year: "1980-81"
+  - observation_date: 1982-03-31
+    value: 24.9204
+    fiscal_year: "1981-82"
+  - observation_date: 1983-03-31
+    value: 26.7569
+    fiscal_year: "1982-83"
+  - observation_date: 1984-03-31
+    value: 28.0299
+    fiscal_year: "1983-84"
+  - observation_date: 1985-03-31
+    value: 29.6689
+    fiscal_year: "1984-85"
+  - observation_date: 1986-03-31
+    value: 31.2847
+    fiscal_year: "1985-86"
+  - observation_date: 1987-03-31
+    value: 32.5556
+    fiscal_year: "1986-87"
+  - observation_date: 1988-03-31
+    value: 34.4507
+    fiscal_year: "1987-88"
+  - observation_date: 1989-03-31
+    value: 36.7965
+    fiscal_year: "1988-89"
+  - observation_date: 1990-03-31
+    value: 39.7716
+    fiscal_year: "1989-90"
+  - observation_date: 1991-03-31
+    value: 43.1083
+    fiscal_year: "1990-91"
+  - observation_date: 1992-03-31
+    value: 45.701
+    fiscal_year: "1991-92"
+  - observation_date: 1993-03-31
+    value: 46.9538
+    fiscal_year: "1992-93"
+  - observation_date: 1994-03-31
+    value: 48.2899
+    fiscal_year: "1993-94"
+  - observation_date: 1995-03-31
+    value: 49.091
+    fiscal_year: "1994-95"
+  - observation_date: 1996-03-31
+    value: 50.6447
+    fiscal_year: "1995-96"
+  - observation_date: 1997-03-31
+    value: 52.3579
+    fiscal_year: "1996-97"
+  - observation_date: 1998-03-31
+    value: 52.4935
+    fiscal_year: "1997-98"
+  - observation_date: 1999-03-31
+    value: 53.2311
+    fiscal_year: "1998-99"
+  - observation_date: 2000-03-31
+    value: 53.8894
+    fiscal_year: "1999-00"
+  - observation_date: 2001-03-31
+    value: 54.3697
+    fiscal_year: "2000-01"
+  - observation_date: 2002-03-31
+    value: 55.4597
+    fiscal_year: "2001-02"
+  - observation_date: 2003-03-31
+    value: 56.6
+    fiscal_year: "2002-03"
+  - observation_date: 2004-03-31
+    value: 57.9885
+    fiscal_year: "2003-04"
+  - observation_date: 2005-03-31
+    value: 59.7172
+    fiscal_year: "2004-05"
+  - observation_date: 2006-03-31
+    value: 61.3576
+    fiscal_year: "2005-06"
+  - observation_date: 2007-03-31
+    value: 63.2017
+    fiscal_year: "2006-07"
+  - observation_date: 2008-03-31
+    value: 64.438
+    fiscal_year: "2007-08"
+  - observation_date: 2009-03-31
+    value: 66.8397
+    fiscal_year: "2008-09"
+  - observation_date: 2010-03-31
+    value: 67.7042
+    fiscal_year: "2009-10"
+  - observation_date: 2011-03-31
+    value: 68.8561
+    fiscal_year: "2010-11"
+  - observation_date: 2012-03-31
+    value: 70.3261
+    fiscal_year: "2011-12"
+  - observation_date: 2013-03-31
+    value: 71.5454
+    fiscal_year: "2012-13"
+  - observation_date: 2014-03-31
+    value: 73.0337
+    fiscal_year: "2013-14"
+  - observation_date: 2015-03-31
+    value: 74.0662
+    fiscal_year: "2014-15"
+  - observation_date: 2016-03-31
+    value: 74.5804
+    fiscal_year: "2015-16"
+  - observation_date: 2017-03-31
+    value: 76.0754
+    fiscal_year: "2016-17"
+  - observation_date: 2018-03-31
+    value: 77.0388
+    fiscal_year: "2017-18"
+  - observation_date: 2019-03-31
+    value: 78.7948
+    fiscal_year: "2018-19"
+  - observation_date: 2020-03-31
+    value: 80.8738
+    fiscal_year: "2019-20"
+  - observation_date: 2021-03-31
+    value: 85.1002
+    fiscal_year: "2020-21"
+  - observation_date: 2022-03-31
+    value: 85.3036
+    fiscal_year: "2021-22"
+  - observation_date: 2023-03-31
+    value: 91.2996
+    fiscal_year: "2022-23"
+  - observation_date: 2024-03-31
+    value: 96.1117
+    fiscal_year: "2023-24"
+  - observation_date: 2025-03-31
+    value: 100
+    fiscal_year: "2024-25"

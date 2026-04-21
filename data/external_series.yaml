@@ -9,7 +9,7 @@ series:
     series_name: "Construction Output Price Index: Infrastructure, new work"
     provider: "ONS"
     unit: index_2015_100
-    frequency: quarterly
+    frequency: monthly
     lag_days: 45
     status: accredited
     source_url: "https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/datasets/interimconstructionoutputpriceindices"
@@ -117,7 +117,7 @@ series:
     series_name: "GDP deflator at market prices"
     provider: "ONS"
     unit: index_reference_year_varies
-    frequency: quarterly
+    frequency: annual
     lag_days: 90
     status: accredited
     source_url: "https://www.gov.uk/government/statistics/gdp-deflators-at-market-prices-and-money-gdp"

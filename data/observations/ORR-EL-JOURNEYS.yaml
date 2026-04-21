@@ -1,0 +1,63 @@
+# Observations for series ORR-EL-JOURNEYS
+# ORR Elizabeth line annual passenger journeys (millions), fiscal year ending 31 March
+# Each entry maps to one row in pda_shared.external_observations (series_id resolved by series_code at load time)
+
+series_code: ORR-EL-JOURNEYS
+unit: count_millions
+frequency: annual
+observation_date_convention: end-of-fiscal-year
+
+source:
+  publication: "ORR Passenger rail usage, Table 1223 (passenger journeys by operator)"
+  release_date: 2026-03-19
+  workbook: table-1223-passenger-journeys-by-operator.ods
+  workbook_url: "https://dataportal.orr.gov.uk/media/1476/table-1223-passenger-journeys-by-operator.ods"
+  dataset_landing_page: "https://dataportal.orr.gov.uk/statistics/usage/passenger-rail-usage/table-1223-passenger-journeys-by-operator/"
+  sheet: "1223_Journeys_by_operator"
+  sub_table: "Table 1223a (annual data)"
+  column: "Elizabeth line(million)[note 6]"
+
+load_scope_note: >
+  The ORR workbook carries seven further years of Elizabeth line column
+  data (2015/16 through 2021/22) under the TfL Rail predecessor branding;
+  those are not loaded here. The series as defined in
+  data/external_series.yaml begins April 2022, per ORR note 6 (Elizabeth
+  line opened to passengers 24 May 2022). If those predecessor years are
+  wanted later as a London rail proxy, they should be loaded under a
+  separate series_code.
+
+precision_note: >
+  Values stored to six decimal places, rounded from the ORR workbook's
+  native precision (approximately 10 to 14 decimal places).
+
+provisional_note: >
+  All three observations carry the ORR [p] provisional flag at load time.
+  Subsequent revisions load as new rows with later captured_at per the
+  append-only convention, not as updates.
+
+observations:
+  - observation_date: 2023-03-31
+    value: 143.149980
+    fiscal_year: "Apr 2022 to Mar 2023"
+    orr_notes_applied:
+      - note_number: 6
+        note_text: "On 24 May 2022 the Elizabeth line opened to passengers. Also, on this date the service running under TfL Rail was rebranded as the Elizabeth line."
+      - note_number: 7
+        note_text: "Usage for operators in the London and South East sector includes an estimate for travel with the TfL Freedom Pass. The estimates for usage during the financial year April 2022 to March 2023 are affected by the lower levels of usage seen during the pandemic. Consequently, estimates of passenger journeys for operators in the London and South East sector are likely to be understated by around 1%."
+    status: provisional
+
+  - observation_date: 2024-03-31
+    value: 220.272284
+    fiscal_year: "Apr 2023 to Mar 2024"
+    orr_notes_applied:
+      - note_number: 6
+        note_text: "On 24 May 2022 the Elizabeth line opened to passengers. Also, on this date the service running under TfL Rail was rebranded as the Elizabeth line."
+    status: provisional
+
+  - observation_date: 2025-03-31
+    value: 242.866594
+    fiscal_year: "Apr 2024 to Mar 2025"
+    orr_notes_applied:
+      - note_number: 6
+        note_text: "On 24 May 2022 the Elizabeth line opened to passengers. Also, on this date the service running under TfL Rail was rebranded as the Elizabeth line."
+    status: provisional

@@ -1,0 +1,161 @@
+# Observations for series ORR-EL-JOURNEYS-Q
+# ORR Elizabeth line quarterly passenger journeys (millions), end-of-quarter dates
+# Each entry maps to one row in pda_shared.external_observations (series_id resolved by series_code at load time)
+
+series_code: ORR-EL-JOURNEYS-Q
+unit: count_millions
+frequency: quarterly
+observation_date_convention: end-of-quarter
+
+source:
+  publication: "ORR Passenger rail usage, Table 1223 (passenger journeys by operator)"
+  release_date: 2026-03-19
+  workbook: table-1223-passenger-journeys-by-operator.ods
+  workbook_url: "https://dataportal.orr.gov.uk/media/1476/table-1223-passenger-journeys-by-operator.ods"
+  dataset_landing_page: "https://dataportal.orr.gov.uk/statistics/usage/passenger-rail-usage/table-1223-passenger-journeys-by-operator/"
+  sheet: "1223_Journeys_by_operator"
+  sub_table: "Table 1223b (quarterly data)"
+  column: "Elizabeth line(million)[note 6]"
+
+load_scope_note: >
+  Same scope decision as ORR-EL-JOURNEYS annual: load from Q1 FY 2022/23
+  (Apr-Jun 2022, observation_date 2022-06-30) onwards. Pre-2022 quarterly
+  entries under the Elizabeth line column (approximately 28 rows) refer
+  to the TfL Rail predecessor services and are not loaded here.
+
+precision_note: >
+  Values stored to six decimal places, rounded from the ORR workbook's
+  native precision (approximately 10 to 14 decimal places).
+
+reconciliation_check:
+  performed_at_load: true
+  description: >
+    Quarterly-to-annual reconciliation against the ORR-EL-JOURNEYS series
+    was performed before load. The sum of the four FY 2022/23 quarterly
+    rows equals the 2022/23 annual value at six-decimal precision (delta
+    0.000000). Same check passes for FY 2023/24 and FY 2024/25. FY 2025/26
+    is incomplete at this load and carries only three of four quarters.
+    The two series are drawn from the same underlying ORR base data and
+    remain consistent; no rebasing or revision has occurred between the
+    annual and quarterly tables in this release.
+
+flag_summary:
+  provisional_flag_p: "All 15 rows carry [p] provisional."
+  revised_flag_r: "One row (2025-09-30, Jul-Sep 2025) carries [r] revised."
+  partial_first_quarter: "One row (2022-06-30) covers a partial quarter because the Elizabeth line opened 24 May 2022."
+
+orr_notes:
+  note_6:
+    text: "On 24 May 2022 the Elizabeth line opened to passengers. Also, on this date the service running under TfL Rail was rebranded as the Elizabeth line."
+    applies_to: "All 15 rows, via the column header."
+  note_7:
+    text: "Usage for operators in the London and South East sector includes an estimate for travel with the TfL Freedom Pass. The estimates for usage during the financial year April 2022 to March 2023 are affected by the lower levels of usage seen during the pandemic. Consequently, estimates of passenger journeys for operators in the London and South East sector are likely to be understated by around 1%."
+    applies_to: "The four FY 2022/23 quarters (2022-06-30, 2022-09-30, 2022-12-31, 2023-03-31)."
+
+observations:
+  - observation_date: 2022-06-30
+    value: 21.829059
+    period_label: "Apr to Jun 2022"
+    fiscal_year: "2022/23"
+    flags: ['p']
+    orr_notes_applied: [6, 7]
+    partial_first_quarter: true
+    status: provisional
+  - observation_date: 2022-09-30
+    value: 35.117985
+    period_label: "Jul to Sep 2022"
+    fiscal_year: "2022/23"
+    flags: ['p']
+    orr_notes_applied: [6, 7]
+    status: provisional
+  - observation_date: 2022-12-31
+    value: 41.657962
+    period_label: "Oct to Dec 2022"
+    fiscal_year: "2022/23"
+    flags: ['p']
+    orr_notes_applied: [6, 7]
+    status: provisional
+  - observation_date: 2023-03-31
+    value: 44.544973
+    period_label: "Jan to Mar 2023"
+    fiscal_year: "2022/23"
+    flags: ['p']
+    orr_notes_applied: [6, 7]
+    status: provisional
+  - observation_date: 2023-06-30
+    value: 51.06154
+    period_label: "Apr to Jun 2023"
+    fiscal_year: "2023/24"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2023-09-30
+    value: 55.360336
+    period_label: "Jul to Sep 2023"
+    fiscal_year: "2023/24"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2023-12-31
+    value: 58.461679
+    period_label: "Oct to Dec 2023"
+    fiscal_year: "2023/24"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2024-03-31
+    value: 55.38873
+    period_label: "Jan to Mar 2024"
+    fiscal_year: "2023/24"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2024-06-30
+    value: 59.030772
+    period_label: "Apr to Jun 2024"
+    fiscal_year: "2024/25"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2024-09-30
+    value: 61.007304
+    period_label: "Jul to Sep 2024"
+    fiscal_year: "2024/25"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2024-12-31
+    value: 63.277026
+    period_label: "Oct to Dec 2024"
+    fiscal_year: "2024/25"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2025-03-31
+    value: 59.551493
+    period_label: "Jan to Mar 2025"
+    fiscal_year: "2024/25"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2025-06-30
+    value: 63.42421
+    period_label: "Apr to Jun 2025"
+    fiscal_year: "2025/26"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2025-09-30
+    value: 64.682155
+    period_label: "Jul to Sep 2025"
+    fiscal_year: "2025/26"
+    flags: ['p', 'r']
+    orr_notes_applied: [6]
+    status: provisional
+  - observation_date: 2025-12-31
+    value: 67.10098
+    period_label: "Oct to Dec 2025"
+    fiscal_year: "2025/26"
+    flags: ['p']
+    orr_notes_applied: [6]
+    status: provisional
