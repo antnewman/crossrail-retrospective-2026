@@ -232,7 +232,67 @@ For **categorical findings** (band codes, thresholds, discrete classifications),
 
 ## Assumption 5: value_for_money_band
 
-[populated during session]
+**Method applied:** Derive the restated VFM band from each of the three BCR scenarios in assumption 4 using the DfT VFM band mapping (band 1 poor BCR<1.5, band 2 medium 1.5-2.0, band 3 high 2.0-4.0, band 4 very high ≥4.0). One assumption-5 row per BCR scenario, preserving 1:1 parity with assumption 4's three rows.
+
+**Observations used:**
+- `crossrail_retrospective.assumptions.value = 2` (value_for_money_band, baseline band 2 medium) [baseline]
+- Parent BCR values from assumption 4's three drift rows (database ids captured in per-row notes):
+  - BCR 1.883250 (nominal cost ratio) → band 2
+  - BCR 1.917550 (real no-correction) → band 2
+  - BCR 2.061367 (real with 7.5% correction) → band 3
+
+**Formula:**
+```
+band_code = discrete mapping from BCR value to {1, 2, 3, 4} per DfT TAG thresholds
+drift_absolute = restated_band - baseline_band
+drift_percent  = drift_absolute / baseline_band × 100  (ordinal-level, see caveat below)
+
+Row 5a: BCR 1.883 → band 2; drift_abs 0; drift_pct 0.0000%
+Row 5b: BCR 1.918 → band 2; drift_abs 0; drift_pct 0.0000%
+Row 5c: BCR 2.061 → band 3; drift_abs +1; drift_pct 50.0000%
+```
+
+**Decisions made:**
+
+- **Three rows, one per parent BCR scenario (Option 1).**
+  - Alternatives considered: two rows aggregating by distinct band outcome; a single row encoding a range.
+  - Decision: Option 1, three rows.
+  - Reasoning: preserves 1:1 parity with assumption 4 so each band row traces to exactly one BCR scenario; keeps the outcome distribution explicit (two of three BCR scenarios produce no band change); supports clean extension if Scenario B is added later. The apparent duplication of headline outcome between rows 5a and 5b is honest rather than redundant.
+
+- **Cross-reference parent BCR rows by id with query pattern in notes.**
+  - Decision: each assumption 5 row carries the parent BCR drift_calculation id plus an inline SQL query pattern in its notes field.
+  - Reasoning: makes the derivation chain self-traceable. A reader looking at any assumption 5 row can jump to the parent BCR row with one SQL query, without rebuilding the join from assumption 4.
+
+- **Drift_percent is ordinal-level, not continuous-level. Disclosed on every row.**
+  - Reasoning: drift_percent computed on band codes (integers 1-4) is mathematically well-defined (1/2 × 100 = 50% for row 5c) but conceptually misleading if read as a continuous drift metric. Every row's notes state: "drift_percent here is computed on band code (ordinal 1-4). Band-level drift = 0% does not imply zero underlying BCR drift; see parent assumption 4 drift_calculation row for continuous BCR drift." Row 5c's notes additionally emphasise that +50% band drift is a mechanical consequence of ordinal encoding, not a headline number.
+
+- **Band change on row 5c is methodologically sensitive, not robust.**
+  - Inherited from assumption 4's sensitivity disclosure. Row 5c's notes carry the full language: boundary at ~4.3% pre-2014 correction; 5-10% plausible range all yields band 3; 0% correction yields band 2. Findings must not read row 5c as a robust band change.
+
+**Caveats applied:**
+
+- All three rows inherit caveats from their parent BCR row in assumption 4.
+- Row 5c specifically inherits the boundary-sensitivity language from assumption 4's real-with-correction row.
+- Rows 5b and 5c both carry caveat 1 (ONS-OPI vs BCIS-TPI) via their parent BCR rows' real cost ratio. Row 5a does not (no deflator in parent).
+
+**Drift result:**
+
+- Three rows. Two at band 2 (drift 0); one at band 3 (drift +1).
+- Direction: unchanged or upward. No downward band drift under any scenario.
+- Robust finding: the restated BCR sits close to the medium/high boundary. Across all three scenarios, the restated band is either medium (2 of 3) or high (1 of 3); the boundary crossing is methodologically sensitive.
+- Defensible one-line summary: "The restated BCR sits close to the medium/high band boundary; the band result is methodologically sensitive rather than robust, with two of three co-equal scenarios keeping the BCR in the medium band and one nudging into high."
+
+**Confidence:** low on all three rows, inherited from parent BCR. Row 5c carries an additional boundary-sensitivity caveat.
+
+**Notes for methodology.md:**
+
+- Categorical findings derived from continuous metrics crossing externally imposed thresholds should always carry an explicit threshold-proximity disclosure.
+- The DfT TAG bands are a published external reference frame; methodology.md should cite the TAG source and note that the band definitions themselves are subject to DfT revision over time. Current bands are from DFT-TAG-VFM per sources.yaml.
+- The ordinal vs continuous drift_percent issue is generalisable. methodology.md should describe the distinction and state the investigation's convention: drift_percent is mechanically computed from baseline and comparison values regardless of unit type; readers must check the unit (count, gbp, ratio, band_code) to interpret drift_percent correctly.
+
+**What this tells us about drift patterns more generally:**
+
+Categorical findings have a different epistemic status than continuous findings. When a categorical finding depends on a continuous metric crossing an externally defined threshold, the strength of the categorical claim is bounded by the sensitivity of the continuous metric at the threshold. For Crossrail's BCR restatement, one of three co-equal scenarios crosses the 2.0 medium/high threshold, and it crosses by only 0.06 points; the other two scenarios fall below the threshold by 0.08-0.12 points. A reader treating "VFM band drifted medium to high" as a finding is overclaiming; the defensible finding is "the restated BCR sits close to the medium/high boundary with sensitivity-dependent band assignment." More generally: any drift analysis that maps a continuous metric through a discrete banding framework should report continuous drift as the primary finding, with the band change flagged as a secondary, sensitivity-dependent consequence rather than a headline.
 
 ## Cross-cutting decisions
 
