@@ -117,7 +117,7 @@ series:
     series_name: "GDP deflator at market prices"
     provider: "ONS"
     unit: index_reference_year_varies
-    frequency: quarterly
+    frequency: annual
     lag_days: 90
     status: accredited
     source_url: "https://www.gov.uk/government/statistics/gdp-deflators-at-market-prices-and-money-gdp"
