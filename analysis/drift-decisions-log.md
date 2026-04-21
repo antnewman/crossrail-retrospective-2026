@@ -163,7 +163,72 @@ Assumption 3's deferral is itself a data point about drift methodology: some pri
 
 ## Assumption 4: benefit_cost_ratio_dft
 
-[populated during session]
+**Method applied:** Sensitivity-only restatement of the 2011 BCR (1.97, transport-only DfT value) under Scenario A (observed 2024/25 demand and outturn cost). Three co-equal rows reflecting three defensible cost-ratio treatments: nominal cash, real with 7.5% pre-2014 correction, real without pre-2014 correction. Benefits assumed linear in demand. Not a full NPV reconstruction.
+
+**Observations used:**
+- `crossrail_retrospective.assumptions.value = 1.97` (benefit_cost_ratio_dft, baseline_date 2011-07-01) [baseline]
+- `ORR-EL-JOURNEYS @ 2025-03-31 = 242,866,594` (same demand observation as assumption 2; benefit driver)
+- `NAO-CROSSRAIL-2021 outturn = £18,800,000,000` (cost driver, cash terms)
+- `ONS-OPI-INFRA-NEW @ 2014-01-31 = 100.2`, `mean of calendar 2017 = 102.025` (deflator inputs for the real cost ratios)
+- `crossrail_retrospective.drift_calculations` Row A and Row B of assumption 1 (cost ratios derived from those rows)
+
+**Formula:**
+```
+demand_ratio           = 242,866,594 / 200,000,000 = 1.21433297
+cost_ratio_nominal     = 18,800,000,000 / 14,800,000,000 = 1.27027027
+cost_ratio_real_no_corr= 18,463,709,875.03 / 14,800,000,000 = 1.24754796  (from assumption 1 Row A)
+cost_ratio_real_with_corr = 18,463,709,875.03 / 15,910,000,000 = 1.16050973  (from assumption 1 Row B)
+
+restated_BCR = 1.97 × demand_ratio / cost_ratio
+
+BCR_nominal        = 1.97 × 1.21433297 / 1.27027027 = 1.883250   (drift -0.086750, -4.4036%)
+BCR_real_no_corr   = 1.97 × 1.21433297 / 1.24754796 = 1.917550   (drift -0.052450, -2.6624%)
+BCR_real_with_corr = 1.97 × 1.21433297 / 1.16050973 = 2.061367   (drift +0.091367, +4.6379%)
+```
+
+**Decisions made:**
+
+- **Three co-equal rows, no primacy.**
+  - Alternatives considered: two rows (A-nominal plus a single A-real, with one designated primary); one row (single point estimate with sensitivity range in notes).
+  - Decision: three rows, none designated primary.
+  - Reasoning: the 7.5% pre-2014 correction used in one of the two real-cost variants is itself an estimate at the middle of a 5-10% plausible range. Labelling the 7.5%-based row as "primary" would claim methodological confidence that the underlying data does not support, and would cascade into findings that overstate the robustness of the band change (see next decision). Matching the neutral A/B pattern of assumption 1 keeps the methodological choice explicit for readers of the findings.
+
+- **Band-change finding is sensitivity-dependent, not robust.**
+  - Three rows produce two distinct band outcomes: BCR_nominal (1.883) and BCR_real_no_corr (1.918) both fall in band 2 (medium, 1.5-2.0); BCR_real_with_corr (2.061) falls in band 3 (high, 2.0-4.0).
+  - The boundary at which restated BCR crosses 2.0 is a cumulative pre-2014 correction of approximately 4.3%. Below that, band 2; above, band 3.
+  - Our stated plausible range for pre-2014 correction is 5-10%, all of which keep BCR just above the 2.0 boundary (BCR 2.01 to 2.11, band 3). But zero correction (Row A-style treatment) gives BCR 1.918 (band 2).
+  - The band change is therefore robust within the 5-10% plausible range for pre-2014 inflation, but NOT robust against the question "should any pre-2014 correction be applied at all?". Findings must describe the band change as methodologically sensitive rather than robust.
+
+- **Scenario B (long-run demand trajectory consistent with first three years) deferred.**
+  - Reasoning: "plausible trajectory consistent with the first three years" is a judgement call requiring separate framing. Captured as an open question.
+
+- **Confidence: low for all three rows.**
+  - Sensitivity-only restatement; benefits assumed linear in demand. Not an NPV reconstruction. Confidence reflects the level of the method, not the arithmetic (which is exact and reproducible).
+
+**Caveats applied:**
+
+- Caveat 1 (ONS-OPI vs BCIS-TPI): applies to the two real-cost rows via the cost ratio; does not apply to the nominal row (no deflator). Magnitude sensitive to index choice.
+- Caveat 2 (pandemic break in demand series): applies to all three rows via the demand ratio (same demand observation as assumption 2).
+- Caveat 3 (multiple restated business cases): applies. No intermediate restated BCR is compared against.
+- Additional for the real-no-correction row: inherits assumption 1 Row A's pre-2014 gap caveat (mixes 2010-11 baseline with Jan-2014 deflated outturn).
+
+**Drift result:**
+
+- Three co-equal rows. Restated BCR range: 1.88 to 2.06.
+- Direction: mixed within the range. Nominal and real-no-correction show a small negative drift (BCR slightly below baseline 1.97); real-with-correction shows a small positive drift (BCR slightly above 1.97 and just above the 2.0 band boundary).
+- Band result: two of three scenarios stay in band 2 (medium); one moves to band 3 (high). Band change sensitivity-dependent.
+
+**Confidence:** low on all three rows. The arithmetic is exact; the confidence rating reflects the method's level (sensitivity-only order-of-magnitude), not the computation.
+
+**Notes for methodology.md:**
+
+- The three-row structure for assumption 4 mirrors the two-row structure for assumption 1 (which itself reflects the pre-2014 correction choice). methodology.md should describe the cascade: decisions made in the cost deflation step (assumption 1) propagate into the BCR restatement (assumption 4) and into the band result (assumption 5).
+- The term "sensitivity-only restatement" means: we re-evaluate the BCR under observed demand and cost ratios, holding the BCR formula's other assumptions constant. This is not a Green Book NPV reconstruction; the confidence rating of "low" is the right level for all three rows.
+- The 2.0 band boundary is an externally imposed threshold (DfT TAG VfM framework), not a property of the Crossrail data. Crossing that boundary with a result computed at the tail of the plausible pre-2014 range is a boundary artefact, not a robust finding.
+
+**What this tells us about drift patterns more generally:**
+
+For **categorical findings** (band codes, thresholds, discrete classifications), sensitivity to small methodological choices at the tail of a price-base window can flip the answer. **Continuous metrics (drift percent)** are more robust; **categorical metrics (band crossings)** need explicit sensitivity disclosure. An investigation that reports a band change as a headline should be held to a higher methodological standard than one that reports a continuous percentage drift. For BCR-type analyses specifically, the band framework concentrates methodological risk at each band boundary; a restated BCR within 0.1 of a boundary under one scenario and 0.1 the other side under another is not a robust categorical claim.
 
 ## Assumption 5: value_for_money_band
 
@@ -181,3 +246,13 @@ Assumption 3's deferral is itself a data point about drift methodology: some pri
 **Arose during:** assumption 2 (passenger_journeys_full_opening).
 **Why it matters:** the +21.4% headline drift conflates the two components. A reader wanting to attribute drift causes cannot do so from the headline alone. The decomposition is required by INVESTIGATION_BRIEF.md caveat 2.
 **Provisional handling:** no decomposition performed this session; headline drift row written with the deferral and its reasoning recorded in the row's `notes` field. A London rail proxy series (e.g. ORR TfL Underground annual journeys, or a comparable TOC journeys series) for 2011-2019 needs to be loaded first. Follow-up unit of work: load the proxy, compute the 2011-2019 trend, project it to 2024/25 without pandemic, and compare against actual 2024/25 (242.866594m) to decompose drift into trend and recovery components.
+
+**Question:** Scenario B for assumption 4 (BCR restatement): how should the "plausible long-run demand trajectory consistent with the first three years of operation" be defined?
+**Arose during:** assumption 4 (benefit_cost_ratio_dft).
+**Why it matters:** INVESTIGATION_BRIEF.md section 6.4 specifies two scenarios (A and B) for the BCR restatement. Scenario B requires a demand trajectory projection, which is a judgement call rather than a computation.
+**Provisional handling:** deferred this session. Scenario A (three rows, co-equal) written; Scenario B not. Follow-up needs an explicit methodology for "plausible trajectory" (linear extrapolation, exponential decay toward an assumed peak, match to comparable line openings, etc.).
+
+**Question:** At what point is a categorical finding (e.g. band change) strong enough to make a headline claim when the underlying metric sits near a threshold boundary?
+**Arose during:** assumption 4, band-boundary sensitivity.
+**Why it matters:** Crossrail's restated BCR under one of three co-equal scenarios (real, 7.5% pre-2014 correction) sits at 2.06, just above the 2.0 medium/high boundary. The other two scenarios (BCR 1.88, 1.92) stay below it. A headline reading "Crossrail's VfM band drifted from medium to high" is supported by one of three scenarios but not by the other two; a headline reading "Crossrail's VfM band is on the medium/high boundary with one scenario suggesting a move to high" is more defensible but also less clean.
+**Provisional handling:** decisions log records the boundary sensitivity explicitly. Findings must describe the band change as methodologically sensitive rather than robust. A general methodology for headline-strength thresholds near band boundaries is a candidate for the shared methodology-shared.md in the umbrella repo.
