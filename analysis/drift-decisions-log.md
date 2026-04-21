@@ -316,3 +316,84 @@ Categorical findings have a different epistemic status than continuous findings.
 **Arose during:** assumption 4, band-boundary sensitivity.
 **Why it matters:** Crossrail's restated BCR under one of three co-equal scenarios (real, 7.5% pre-2014 correction) sits at 2.06, just above the 2.0 medium/high boundary. The other two scenarios (BCR 1.88, 1.92) stay below it. A headline reading "Crossrail's VfM band drifted from medium to high" is supported by one of three scenarios but not by the other two; a headline reading "Crossrail's VfM band is on the medium/high boundary with one scenario suggesting a move to high" is more defensible but also less clean.
 **Provisional handling:** decisions log records the boundary sensitivity explicitly. Findings must describe the band change as methodologically sensitive rather than robust. A general methodology for headline-strength thresholds near band boundaries is a candidate for the shared methodology-shared.md in the umbrella repo.
+
+---
+
+## Session close
+
+Session ended 2026-04-22 (originally opened 2026-04-21, closed across two calendar dates due to mid-session methodology correction).
+
+### Rows inserted
+
+| Assumption | Drift rows inserted | Status |
+|---|---:|---|
+| 1. construction_funding_envelope | 2 | computed |
+| 2. passenger_journeys_full_opening | 1 | computed (decomposition deferred) |
+| 3. revenue_2024_25 | 0 | deferred pending Ant's TfL data supply |
+| 4. benefit_cost_ratio_dft | 3 | computed (Scenario B deferred) |
+| 5. value_for_money_band | 3 | computed |
+| **Total** | **9** | |
+
+### One-line findings summary per assumption
+
+Framed honestly, with sensitivity flags where applicable. **Not headline findings; raw drift results.** Findings drafting is a separate unit.
+
+1. **construction_funding_envelope:** real-terms overspend of approximately £2.5-3.7bn (+15% to +25%) against the 2010-11 baseline, depending on whether a 7.5% pre-2014 construction-inflation correction is applied to the baseline. Materially smaller than the +28% nominal cash overrun headline cited in PAC-CROSSRAIL-2021. Direction robust under the corrected deflation method; magnitude sensitive to index choice (caveat 1) and pre-2014 correction magnitude.
+
+2. **passenger_journeys_full_opening:** headline drift of +21.43% (242.9m outturn vs 200m forecast). Likely UNDERSTATES the eventual steady-state drift because 2024/25 is year three of operation and the ramp-up has not completed. Caveat 2 (pandemic break) decomposition deferred; headline conflates pre-pandemic trend drift and post-pandemic recovery dynamics. Direction robust; magnitude a lower bound.
+
+3. **revenue_2024_25:** deferred this session. TfL primary-source values not loaded. London Assembly cross-reference (£606m 2023/24) suggests substantial negative drift vs the £884m 2023/24 forecast point; 2024/25 full-year is expected to be similarly below the £1.037bn forecast, but precise figures must come from TfL primary sources. Follow-up: separate small session on supply of three TfL Annual Report values with primary citations.
+
+4. **benefit_cost_ratio_dft (three co-equal scenarios, Scenario A only):**
+   - Nominal cost ratio: restated BCR 1.88 (drift -4.40%).
+   - Real cost ratio, no pre-2014 correction: restated BCR 1.92 (drift -2.66%).
+   - Real cost ratio, 7.5% pre-2014 correction: restated BCR 2.06 (drift +4.64%).
+   - Direction mixed across the three co-equal scenarios; restated BCR in the range 1.88-2.06. Scenario B deferred. Not a full NPV reconstruction.
+
+5. **value_for_money_band:** two of three scenarios keep the BCR in band 2 (medium, 1.5-2.0, no band change); one scenario nudges the BCR just above 2.0 into band 3 (high). Band-change finding is methodologically sensitive rather than robust; boundary at approximately 4.3% pre-2014 correction. Honest summary: "restated BCR sits close to the medium/high band boundary with sensitivity-dependent band assignment."
+
+### Open methodological questions surfaced during the session
+
+All recorded under "Open questions" above. Summary:
+
+- **Caveat 2 decomposition for assumption 2.** Requires a London rail proxy series (ORR TfL Underground, or similar TOC journeys series) covering 2011-2019 to estimate the no-pandemic counterfactual. Not loaded in this session. Follow-up unit of work.
+- **Scenario B for assumption 4.** The "plausible long-run demand trajectory consistent with the first three years of operation" is a judgement call requiring separate framing (linear extrapolation, exponential decay to peak, match to comparable line openings, etc.). Methodology question rather than computation.
+- **Headline strength threshold for categorical findings.** When does a categorical finding (e.g. band change) sitting near a threshold boundary become a defensible headline? Sits as a candidate input for methodology-shared.md in the umbrella repo.
+
+### Cross-cutting decisions recorded
+
+- **Corrected deflation method for assumption 1.** INVESTIGATION_BRIEF.md section 6.1 specified a one-sided reprice (baseline to current prices, outturn in cash) that produces direction-sensitive results. Corrected method puts both sides in 2010-11 prices (proxied by Jan 2014 prices in practice) using ONS-OPI-INFRA-NEW as the deflator. INVESTIGATION_BRIEF.md will need updating in a separate commit once the corrected method is finalised.
+
+### Recommended next steps
+
+**For the methodology.md writing session (next unit):**
+
+- methodology.md must describe the corrected deflation method for assumption 1, replacing the flawed one-sided reprice in the current brief.
+- methodology.md must describe the ordinal vs continuous drift_percent distinction and the band-at-boundary sensitivity framing.
+- methodology.md must cite this decisions log as the source record for methodological choices made during drift computation.
+- methodology.md must list the deferred computations (assumption 3; caveat 2 decomposition for assumption 2; Scenario B for assumption 4) with their unblocking requirements.
+- methodology.md section numbering per INVESTIGATION_BRIEF.md was 6.1-6.5; the corrected method keeps the same outline but fixes the computational step specified in 6.1.
+
+**For the TFL-EL-REVENUE follow-up:**
+
+- Required input: three TfL Annual Report values for Elizabeth Line annual passenger income for fiscal years 2022/23, 2023/24, and 2024/25, each with primary TfL citation (document title, section or page, and date). Source URLs already captured in data/external_series.yaml for TFL-EL-REVENUE.
+- Required action: load into pda_shared.external_observations under TFL-EL-REVENUE using the same ingest pattern (YAML provenance file + per-row SQL, committed together).
+- Expected output: one drift row for assumption 3 (direct comparison of £1.037bn December 2019 forecast against 2024/25 outturn), similar shape to assumption 2.
+
+**For the Scenario B follow-up (assumption 4):**
+
+- Required input: an explicit methodology statement for "plausible long-run demand trajectory". Candidates include (i) linear extrapolation of observed 2022/23-2024/25 growth rate; (ii) logistic curve fitting to a specified peak; (iii) matching to comparable line openings (e.g. Jubilee Line extension, London Overground). Choice is a judgement call rather than a computation.
+- Required action: document the chosen trajectory and apply it as an alternative demand ratio in a new assumption-4 row (with corresponding assumption-5 row).
+- Expected output: one additional assumption-4 row and one additional assumption-5 row, bringing totals to 4 + 4 = 8 across those two assumptions.
+
+**For the caveat 2 decomposition (assumption 2):**
+
+- Required input: a loaded London rail proxy series covering 2011-2019. Most defensible candidates are ORR-published TfL Underground annual journeys (via the same Table 1223 file's predecessor sub-tables or a separate TfL publication) or a GB-wide passenger journeys trend that could be scaled to London.
+- Required action: load the proxy series using the existing ingest pattern; compute the 2011-2019 trend; project it to 2024/25 without a pandemic; compare against actual 242.9m to decompose total drift into trend and recovery components.
+- Expected output: two additional assumption-2 rows (trend drift; recovery drift).
+
+**For INVESTIGATION_BRIEF.md update:**
+
+- Section 6.1 needs revision to reflect the corrected deflation method. This is a cross-cutting decision already recorded above. The update should be a small separate commit on its own branch once the corrected method is finalised.
+
+### End of session.
