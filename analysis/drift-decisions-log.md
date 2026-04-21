@@ -137,7 +137,29 @@ Demand forecasts stated "at steady state" can be **over-performed** in the headl
 
 ## Assumption 3: revenue_2024_25
 
-[populated during session]
+**Method applied:** Deferred this session. No drift row inserted for this assumption.
+
+**Reason for deferral:** TFL-EL-REVENUE has 0 observations in pda_shared.external_observations. The series row exists in pda_shared.external_series but the TfL primary-source values for Elizabeth Line annual passenger income are pending Ant's data supply from TfL Annual Reports and Quarterly Progress Reports (PDFs, not directly parseable without manual extraction).
+
+**Observations used:** none.
+
+**Provisional handling:** no drift row inserted. A rough out-of-session benchmark exists in the London Assembly cross-reference (LONDON-ASSEMBLY-EL-2025, which cites £606m Elizabeth Line passenger income for 2023/24). This figure is for a different fiscal year than the assumption's baseline comparison (2024/25) and is a secondary citation of TfL figures rather than a TfL primary source, so it is noted only as a rough benchmark and not inserted as a drift row. Using it to compute a provisional drift would risk being misread as a TfL-sourced comparison when it is not.
+
+**What unblocks this calculation:** three TfL Annual Report values for Elizabeth Line annual passenger income for fiscal years 2022/23, 2023/24, and 2024/25, with primary TfL citations (document title, section, and date). Once supplied, these values load into TFL-EL-REVENUE via the same ingest pattern used for the other series (YAML provenance file + per-row SQL insert, committed together).
+
+**Follow-up:** separate small session once the three TfL values are supplied. Will produce one drift row (baseline £1.037bn December 2019 TfL Business Plan forecast for 2024/25, comparison 2024/25 TfL outturn). Similar shape to assumption 2 (direct comparison, no deflator required between a 2019 forecast and a 2024/25 outturn at the order-of-magnitude framing; a more rigorous version would deflate both to a common price year, but that is a Path B methodology refinement for later).
+
+**Caveats that will apply when the calculation is run:** Caveat 2 (pandemic break), per assumption description, because the December 2019 forecast was the last pre-pandemic published forecast and the comparison period is entirely post-pandemic.
+
+**Drift result:** pending.
+
+**Confidence:** n/a (no calculation yet).
+
+**Notes for methodology.md:** methodology.md should note explicitly that assumption 3 is a planned drift row pending data supply, not an omission. The London Assembly cross-reference provides a rough directional expectation (2023/24 outturn ~£606m vs forecast ramp ~£884m for 2023/24, suggesting a substantial negative drift). The 2024/25 comparison against the £1.037bn forecast is expected to be similarly negative, but precise figures must come from TfL primary sources.
+
+**What this tells us about drift patterns more generally:**
+
+Assumption 3's deferral is itself a data point about drift methodology: some primary sources (TfL PDFs in this case) are not readily programmatically ingestable without manual extraction, and a disciplined methodology should defer rather than substitute secondary citations. The cost of deferral is a gap in the drift panel; the cost of substitution would be a row that reads as "TfL data" when the provenance is a London Assembly research document. For cumulative cross-investigation comparison work, the distinction between primary and secondary sources must be rigid.
 
 ## Assumption 4: benefit_cost_ratio_dft
 
