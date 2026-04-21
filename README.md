@@ -4,7 +4,7 @@
 
 **Part of:** [PDA Investigations](https://github.com/antnewman/pda-investigations)
 **Tool:** [PDA Platform](https://github.com/antnewman/pda-platform)
-**Related case:** [MTD Assumption Drift 2026](https://github.com/antnewman/mtd-assumption-drift-2026) (paused, to be resumed after publication of this case).
+**Related case:** [MTD assumption drift 2026](https://github.com/antnewman/mtd-assumption-drift-2026), running in parallel with this investigation.
 **Author:** Ant Newman, TortoiseAI. ORCID: [0000-0002-8612-3647](https://orcid.org/0000-0002-8612-3647).
 **Status:** In progress (April 2026). Target publication: end May 2026.
 **Licence:** [CC BY 4.0](LICENCES/CC-BY-4.0.txt) for written content, [MIT](LICENCES/MIT.txt) for code and data.
