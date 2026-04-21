@@ -1,0 +1,140 @@
+# The assumption register for the Crossrail retrospective investigation
+# Each entry maps to one row in crossrail_retrospective.assumptions
+# source_document references citation_key in sources.yaml
+
+assumptions:
+  - assumption_key: construction_funding_envelope
+    assumption_label: "Construction funding envelope (2010-11 prices)"
+    assumption_description: >
+      The total funding envelope agreed for the Crossrail programme in the
+      July 2011 business case update, following the October 2010 Spending
+      Review which reduced the envelope from £15.9bn to £14.8bn. Covers
+      the costs borne by the sponsors (Department for Transport and 
+      Transport for London) to deliver the railway, including the central 
+      section, rolling stock acquisition (partially), station fit-out, 
+      and Network Rail infrastructure works. Excludes some later additions 
+      (for example, train procurement details that evolved separately).
+    value: 14800000000.00
+    unit: gbp
+    baseline_date: 2011-07-01
+    pricing_base_year: 2010
+    source_document: CROSSRAIL-BC-2011
+    source_location: "Crossrail Business Case Update Summary Report, July 2011"
+    is_primary: true
+    is_superseded: false
+    notes: >
+      This is the primary assumption under investigation. The £14.8bn 
+      figure is the public funding envelope. The actual outturn reached 
+      approximately £18.8bn by December 2020, per NAO 2021, with further 
+      small adjustments subsequently. The drift calculation will compare 
+      the repriced £14.8bn baseline (using ONS Construction OPI 
+      Infrastructure) against the outturn, separating the portion 
+      attributable to construction sector inflation from the residual 
+      overrun.
+
+  - assumption_key: passenger_journeys_full_opening
+    assumption_label: "Annual passenger journeys at full opening"
+    assumption_description: >
+      The Crossrail 2011 business case forecast of annual passenger 
+      journeys on the completed Elizabeth Line at steady state. Cited
+      in NAO 2014 as "200 million" and confirmed in subsequent 
+      Commons Library briefings. This is a rounded figure derived from
+      the detailed demand modelling underpinning the business case.
+    value: 200000000
+    unit: count
+    baseline_date: 2011-07-01
+    source_document: CROSSRAIL-BC-2011
+    source_location: "Crossrail Business Case Update Summary Report, July 2011; confirmed in NAO Crossrail report HC 965 (January 2014)"
+    is_primary: false
+    is_superseded: false
+    notes: >
+      The 200 million figure is the "full opening at steady state" 
+      forecast. The Elizabeth Line achieved 242.9 million in 2024/25, 
+      per ORR. Note that the ramp-up to steady state had not completed 
+      by 2024/25; demand was still growing. Caveat 2 (pandemic as 
+      break in the demand series) applies: the 2011 forecast did not 
+      contemplate a pandemic, and attributing the full variance between 
+      forecast and outturn to either cause would mislead. The drift
+      calculation separates pre-pandemic trend drift (using comparable 
+      London rail proxies, since the Elizabeth Line did not exist 
+      before 2022) from post-pandemic recovery drift (using the 
+      Elizabeth Line directly from May 2022).
+
+  - assumption_key: revenue_2024_25
+    assumption_label: "Annual Elizabeth Line passenger revenue, 2024/25"
+    assumption_description: >
+      TfL's forecast of Elizabeth Line passenger income in financial 
+      year 2024/25, published in the December 2019 TfL Business Plan 
+      (the last comprehensive pre-pandemic revenue forecast). 
+      Forecast ramp: £173m (2020/21), £240m (2021/22), £489m 
+      (2022/23), £884m (2023/24), £1.037bn (2024/25).
+    value: 1037000000.00
+    unit: gbp
+    baseline_date: 2019-12-17
+    pricing_base_year: 2019
+    source_document: TFL-BUSINESS-PLAN-2019-12
+    source_location: "TfL Business Plan 2020/21 to 2024/25 (draft, December 2019)"
+    is_primary: false
+    is_superseded: false
+    notes: >
+      This is the pre-pandemic forecast. A later post-pandemic restated
+      forecast exists but was significantly lower; we use the December 
+      2019 forecast as the baseline because it represents the clearest 
+      published "what did we think this would look like before a 
+      pandemic happened" reference point. Outturn for 2023/24 was 
+      approximately £606m (per London Assembly research, 12% of TfL 
+      total passenger income); the 2024/25 full-year outturn is not 
+      yet publicly available but Q3 2024/25 alone was £160m, 
+      suggesting a full year materially below the £1.037bn baseline. 
+      Caveat 2 applies. The drift calculation separates the pandemic 
+      impact on ramp-up from the steady-state revenue trajectory.
+
+  - assumption_key: benefit_cost_ratio_dft
+    assumption_label: "Benefit-cost ratio, DfT value (transport only)"
+    assumption_description: >
+      The transport-only benefit-cost ratio stated in the 2011 Crossrail
+      business case, using DfT standard appraisal guidance. This value 
+      uses national average salaries for time-saving valuation, as per 
+      DfT convention. TfL's equivalent transport-only BCR, using London 
+      salaries for time-saving valuation, was 2.55. With wider economic 
+      benefits included, the DfT BCR rises to 3.09 (sometimes stated as 
+      3.1).
+    value: 1.97
+    unit: ratio
+    baseline_date: 2011-07-01
+    source_document: CROSSRAIL-BC-2011
+    source_location: "Crossrail Business Case Update Summary Report, July 2011; confirmed in NAO Crossrail report HC 965 (January 2014) section 1.10 and elsewhere"
+    is_primary: false
+    is_superseded: false
+    notes: >
+      The 1.97 BCR places the 2011 Crossrail scheme within DfT's "medium"
+      value-for-money band (1.5 to 2.0). The restatement in this 
+      investigation is not a full NPV reconstruction (which would require
+      TfL's internal appraisal model) but an order-of-magnitude estimate 
+      of the direction and rough scale of the drift in the BCR under 
+      outturn cost and observed demand.
+
+  - assumption_key: value_for_money_band
+    assumption_label: "Value-for-money band, DfT classification"
+    assumption_description: >
+      The DfT value-for-money band into which the 2011 business case 
+      BCR placed the Crossrail scheme. The "medium" band corresponds to
+      a BCR of 1.5 to 2.0 under DfT's Transport Analysis Guidance 
+      (TAG). A BCR of 2.0 to 4.0 is classified as "high"; above 4.0 
+      is "very high".
+    value: 2
+    unit: band_code
+    baseline_date: 2011-07-01
+    source_document: CROSSRAIL-BC-2011
+    source_location: "Crossrail Business Case Update Summary Report, July 2011; DfT TAG Value for Money Framework"
+    is_primary: false
+    is_superseded: false
+    notes: >
+      Band code 2 corresponds to "medium" (1.5 to 2.0) in DfT's TAG 
+      framework. The check in this investigation is whether the 
+      restated BCR (under outturn cost and observed demand) still 
+      falls within the "medium" band, or has drifted into a different 
+      band. The unit "band_code" is an integer code (1 = poor, 
+      2 = medium, 3 = high, 4 = very high), matching the DfT 
+      convention. The assumption is nominally a qualitative category
+      but is encoded numerically for comparison purposes.

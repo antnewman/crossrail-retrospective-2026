@@ -1,0 +1,175 @@
+# Source documents for the Crossrail retrospective investigation
+# Each entry maps to one row in pda_shared.source_documents
+# citation_key is the stable short reference used elsewhere
+
+sources:
+  - citation_key: CROSSRAIL-BC-2011
+    title: "Crossrail Business Case Update: Summary Report"
+    author: "Cross London Rail Links Limited"
+    publisher: "Cross London Rail Links Limited / Transport for London / Department for Transport"
+    publication_date: 2011-07-01
+    url: "https://learninglegacy.crossrail.co.uk/wp-content/uploads/2023/04/Crossrail-Business-Case-Update-Summary-Report-July-2011.pdf"
+    document_type: BUSINESS_CASE
+    notes: >
+      The 2011 revision of the Crossrail business case, following the October
+      2010 Spending Review which reduced the funding envelope from £15.9bn
+      to £14.8bn. The primary baseline document for this investigation. 
+      States the £14.8bn funding envelope, the BCR of 1.97 (transport only,
+      DfT value) and 3.09 (with wider economic benefits), and the demand
+      forecast. The PDF is hosted on the Crossrail Learning Legacy site, 
+      which is maintained as a static archive by TfL following the Crossrail
+      programme's closure.
+
+  - citation_key: CROSSRAIL-LL-APPRAISAL
+    title: "The Appraisal and Business Case for Crossrail"
+    author: "Crossrail Learning Legacy"
+    publisher: "Transport for London (via Crossrail Learning Legacy)"
+    publication_date: 2023-04-02
+    url: "https://learninglegacy.crossrail.co.uk/documents/appraisal-business-case-crossrail/"
+    document_type: LEARNING_LEGACY_PAPER
+    notes: >
+      A retrospective Learning Legacy paper that narrates the history of the
+      Crossrail business case, the BCR evolution from 1993 (1.7:1) through
+      2003 (1.99:1), 2005 (1.8:1 post-Montague Review), and the 2011
+      revision. Cites the 2010 Spending Review reduction of the funding
+      envelope. Useful secondary source for methodology and context.
+
+  - citation_key: NAO-CROSSRAIL-2014
+    title: "Crossrail"
+    author: "Comptroller and Auditor General, National Audit Office"
+    publisher: "UK National Audit Office"
+    publication_date: 2014-01-24
+    url: "https://www.nao.org.uk/wp-content/uploads/2014/01/Crossrail.pdf"
+    document_type: NAO_REPORT
+    notes: >
+      HC 965, Session 2013-14. NAO's first major report on the Crossrail
+      programme. Confirms the 2011 business case BCR of 1.97 (DfT value) 
+      and 2.55 (TfL value using London salaries), and the 3.1 BCR with
+      wider economic benefits. Notes methodological change in 2011 DfT
+      guidance regarding indirect tax treatment. Useful reference for the
+      value-for-money band (the report confirms that Crossrail's BCR fell
+      within DfT's "medium" 1.5-2.0 range).
+
+  - citation_key: NAO-CROSSRAIL-2019
+    title: "Completing Crossrail"
+    author: "Comptroller and Auditor General, National Audit Office"
+    publisher: "UK National Audit Office"
+    publication_date: 2019-05-03
+    url: "https://www.nao.org.uk/reports/completing-crossrail/"
+    document_type: NAO_REPORT
+    notes: >
+      HC 2106, Session 2017-2019. NAO's report following the 2018 
+      announcement of cost and schedule increases. Records the first 
+      significant overrun of the £14.8bn funding envelope and the 
+      extension of the opening date. Referenced for cost baseline 
+      tracking.
+
+  - citation_key: NAO-CROSSRAIL-2021
+    title: "Crossrail: a progress update"
+    author: "Comptroller and Auditor General, National Audit Office"
+    publisher: "UK National Audit Office"
+    publication_date: 2021-07-16
+    url: "https://www.nao.org.uk/reports/crossrail-progress-update/"
+    document_type: NAO_REPORT
+    notes: >
+      NAO's further report on Crossrail progress. States the final forecast
+      cost of £18.9bn as of May 2021 (later refined to approximately 
+      £18.8bn). Notes that the 2011 business case benefits "were based on 
+      predicted increases in population and travel demand set in 2011 and 
+      2015, which may be less likely to occur, at least in the short term", 
+      and that "COVID-19 pandemic may have more long-reaching impacts on 
+      travel". This framing supports caveat 2 of this investigation (the 
+      pandemic as a break in the demand series).
+
+  - citation_key: PAC-CROSSRAIL-2021
+    title: "Crossrail: A progress update"
+    author: "House of Commons Committee of Public Accounts"
+    publisher: "UK Parliament"
+    publication_date: 2021-10-29
+    url: "https://publications.parliament.uk/pa/cm5802/cmselect/cmpubacc/184/report.html"
+    document_type: PAC_REPORT
+    notes: >
+      PAC report following the NAO 2021 update. Records the final forecast 
+      cost of £18.9bn, a 28% overrun of the £14.8bn 2010 budget, and the 
+      open question of repayment of taxpayer loans (£2.875bn total across 
+      three tranches in December 2018 and December 2020). Relevant for the 
+      construction cost drift baseline and for the settled public record on 
+      the overrun.
+
+  - citation_key: TFL-BUSINESS-PLAN-2019-12
+    title: "TfL Business Plan 2020/21 to 2024/25 (draft, December 2019)"
+    author: "Transport for London"
+    publisher: "Transport for London"
+    publication_date: 2019-12-17
+    url: "https://tfl.gov.uk/info-for/media/press-releases/2019/december/tfl-business-plan-investing-to-keep-london-moving"
+    document_type: BUSINESS_PLAN
+    notes: >
+      TfL's draft five-year business plan published 17 December 2019, the 
+      last comprehensive pre-pandemic Elizabeth Line revenue forecast. 
+      Projects Elizabeth Line passenger income of £173m (2020/21), £240m 
+      (2021/22), £489m (2022/23), £884m (2023/24), and £1.037bn (2024/25), 
+      with patronage of 60m rising to 277m over the same period. Published 
+      before the November 2019 revenue-loss adjustment of £500-750m was 
+      fully incorporated. Used as the revenue baseline for this 
+      investigation because it represents the clearest published "what did 
+      we think this would look like before a pandemic happened" reference 
+      point.
+
+  - citation_key: ORR-ELIZABETH-LINE-2024-25
+    title: "TOC key statistics (April 2024 to March 2025): Elizabeth line"
+    author: "Office of Rail and Road"
+    publisher: "Office of Rail and Road"
+    publication_date: 2025-08-21
+    url: "https://dataportal.orr.gov.uk/media/irzbjpb3/elizabeth-line-key-stats.pdf"
+    document_type: OFFICIAL_STATISTICS
+    notes: >
+      ORR's annual Train Operating Company key statistics publication for 
+      the Elizabeth Line, covering April 2024 to March 2025. Reports 242.9 
+      million passenger journeys and 2,380 million passenger kilometres. 
+      The authoritative public source for Elizabeth Line passenger demand
+      outturn. Published annually in August.
+
+  - citation_key: LONDON-ASSEMBLY-EL-2025
+    title: "London's Elizabeth line at three: data analysis"
+    author: "Monolita Mahtab, London Assembly Research Unit"
+    publisher: "Greater London Authority"
+    publication_date: 2025-05-22
+    url: "https://www.london.gov.uk/who-we-are/what-london-assembly-does/london-assembly-research-unit-publications/londons-elizabeth-line-three-data-analysis"
+    document_type: ASSEMBLY_RESEARCH
+    notes: >
+      London Assembly Research Unit analysis marking the third anniversary
+      of the Elizabeth Line. Records 546.7 million total journeys since 
+      opening, quarterly journey growth from 21.8m (April-June 2022) to 
+      63.3m (October-December 2024), and £606m passenger income for 
+      2023/24 (12% of TfL total). Used as a corroborating source for the 
+      ORR passenger figures and as the primary source for revenue outturn.
+
+  - citation_key: ONS-CONSTRUCTION-OPI-QMI
+    title: "Construction output price indices (OPIs) QMI"
+    author: "Office for National Statistics"
+    publisher: "Office for National Statistics"
+    publication_date: 2023-07-01
+    url: "https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/methodologies/constructionoutputpriceindicesopisqmi"
+    document_type: METHODOLOGY
+    notes: >
+      ONS Quality and Methodology Information document for the Construction
+      Output Price Indices. Documents the OPI methodology, including 
+      subseries for Infrastructure new work. Referenced to establish the
+      statistical standing of the ONS OPI Infrastructure series used in 
+      this investigation. The OPIs are designated as National Statistics.
+
+  - citation_key: DFT-TAG-VFM
+    title: "Transport Analysis Guidance (TAG): Value for Money Framework"
+    author: "Department for Transport"
+    publisher: "UK Government"
+    publication_date: 2022-11-01
+    url: "https://www.gov.uk/guidance/transport-analysis-guidance-tag"
+    document_type: APPRAISAL_GUIDANCE
+    notes: >
+      DfT's Transport Analysis Guidance, which defines the value-for-money
+      bands used in transport appraisal. The "medium" VFM band corresponds 
+      to a BCR of 1.5 to 2.0, "high" to 2.0 to 4.0, and so on. Referenced 
+      in the investigation to anchor the fifth assumption (value-for-money 
+      band check). The 2011 Crossrail business case BCR of 1.97 (transport 
+      only) fell within the "medium" band. Note that TAG has been revised 
+      multiple times; the banding structure has been broadly stable.

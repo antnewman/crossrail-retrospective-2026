@@ -1,0 +1,129 @@
+# External data series for the Crossrail retrospective investigation
+# Each entry maps to one row in pda_shared.external_series
+# Some series are shared with the MTD 2026 investigation (already loaded)
+# New series for Crossrail are explicitly noted as such
+
+series:
+  # Primary construction cost reprice series (new for Crossrail)
+  - series_code: ONS-OPI-INFRA-NEW
+    series_name: "Construction Output Price Index: Infrastructure, new work"
+    provider: "ONS"
+    unit: index_2015_100
+    frequency: quarterly
+    lag_days: 45
+    status: accredited
+    source_url: "https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/datasets/interimconstructionoutputpriceindices"
+    notes: >
+      Primary reprice series for the construction cost assumption. 
+      ONS Construction OPI for Infrastructure (new work), published 
+      quarterly, base year 2015=100. Series begins January 2014. For 
+      pre-2014 data, ONS publishes linking factors to the superseded 
+      BIS OPI series which runs back to Q1 1980 quarterly. The 2011 
+      business case baseline therefore requires use of the linked 
+      historical series for reprice to 2010-11 prices. This linking is
+      documented in methodology.md section 6.1 and caveat 1.
+
+  # Secondary construction cost reference (for caveat 1 comparison)
+  - series_code: BCIS-TPI
+    series_name: "BCIS Tender Price Index (General Building)"
+    provider: "BCIS (RICS)"
+    unit: index
+    frequency: quarterly
+    lag_days: 60
+    status: commercial
+    source_url: "https://service.bcis.co.uk/"
+    notes: >
+      The canonical rail industry construction cost index, produced by 
+      the Royal Institution of Chartered Surveyors Building Cost 
+      Information Service. Subscription-restricted. Not used as the 
+      primary reprice basis for this investigation, per caveat 1, but 
+      referenced where a public citation of a BCIS value is available 
+      (typically via NAO or IPA reports that quote BCIS figures). The 
+      investigation notes the index choice explicitly in the published 
+      methodology so that a BCIS-subscribed reader can replicate the 
+      calculation with that series.
+
+  # Passenger demand series (new for Crossrail)
+  - series_code: ORR-EL-JOURNEYS
+    series_name: "Elizabeth Line passenger journeys, annual"
+    provider: "ORR"
+    unit: count_millions
+    frequency: annual
+    lag_days: 150
+    status: accredited
+    source_url: "https://dataportal.orr.gov.uk/statistics/usage/passenger-rail-usage/"
+    notes: >
+      Office of Rail and Road official passenger journey statistics for 
+      the Elizabeth Line, published annually as part of the Train 
+      Operating Company key statistics release. Series begins April 
+      2022 (May 2022 opening of the central section). For the 2024/25 
+      year, 242.9 million journeys. The authoritative public source for
+      passenger demand outturn. ORR also publishes a quarterly series 
+      via the Passenger Rail Usage statistical release.
+
+  # Passenger demand (quarterly) for finer-grained analysis
+  - series_code: ORR-EL-JOURNEYS-Q
+    series_name: "Elizabeth Line passenger journeys, quarterly"
+    provider: "ORR"
+    unit: count_millions
+    frequency: quarterly
+    lag_days: 75
+    status: accredited
+    source_url: "https://dataportal.orr.gov.uk/statistics/usage/passenger-rail-usage/passenger-journeys-by-operator/"
+    notes: >
+      Quarterly version of the ORR Elizabeth Line passenger journeys 
+      series. Used for analysing the post-opening ramp (21.8 million 
+      in Q1 of operation, rising to 63.3 million in Q3 2024/25) and 
+      for separating pandemic recovery drift from steady-state demand.
+
+  # Revenue series (new for Crossrail)
+  - series_code: TFL-EL-REVENUE
+    series_name: "Elizabeth Line passenger income, annual"
+    provider: "TfL"
+    unit: gbp_millions
+    frequency: annual
+    lag_days: 90
+    status: official
+    source_url: "https://tfl.gov.uk/corporate/publications-and-reports/annual-report"
+    notes: >
+      TfL's reported passenger income for the Elizabeth Line, published
+      in TfL Quarterly Progress Reports and Annual Reports. £606m for 
+      2023/24. The 2024/25 full-year figure is not yet public at the 
+      time of this investigation (expected in TfL's 2024/25 Annual 
+      Report, due mid-2025). Q3 2024/25 was £160m (13% of TfL total); 
+      used for interim comparison against the December 2019 forecast 
+      of £1.037bn for the full year.
+
+  # Discount rate (shared series, may already be in pda_shared)
+  - series_code: BOE-BASERATE
+    series_name: "Bank of England official Bank Rate"
+    provider: "Bank of England"
+    unit: percent
+    frequency: event_driven
+    lag_days: 0
+    status: accredited
+    source_url: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate"
+    notes: >
+      The Bank Rate as set by the Monetary Policy Committee. Used for 
+      discount rate sensitivity in the BCR restatement. Ancillary 
+      rather than primary. Already loaded in pda_shared.external_series
+      from the MTD 2026 investigation; this entry is for reference only
+      and need not be inserted again. If the Supabase seed step 
+      encounters a unique constraint violation on series_code, skip 
+      this row.
+
+  # GDP deflator for cross-reference (new for Crossrail)
+  - series_code: ONS-GDP-DEFLATOR
+    series_name: "GDP deflator at market prices"
+    provider: "ONS"
+    unit: index_reference_year_varies
+    frequency: quarterly
+    lag_days: 90
+    status: accredited
+    source_url: "https://www.gov.uk/government/statistics/gdp-deflators-at-market-prices-and-money-gdp"
+    notes: >
+      HM Treasury-published GDP deflator series, used to confirm the
+      plausibility of the Construction OPI reprice by cross-reference 
+      against general price level movement. Not the primary reprice 
+      basis, but referenced in the methodology as a sanity check. 
+      Published by HMT on the basis of ONS data.
