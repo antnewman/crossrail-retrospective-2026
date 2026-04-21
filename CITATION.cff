@@ -1,0 +1,53 @@
+cff-version: 1.2.0
+title: "Crossrail retrospective drift analysis"
+message: "If you cite this investigation, please use the metadata below."
+type: dataset
+version: 0.1.0
+authors:
+  - family-names: Newman
+    given-names: Ant
+    affiliation: "TortoiseAI"
+    orcid: "https://orcid.org/0000-0002-8612-3647"
+repository-code: "https://github.com/antnewman/crossrail-retrospective-2026"
+url: "https://github.com/antnewman/crossrail-retrospective-2026"
+license:
+  - MIT
+  - CC-BY-4.0
+date-released: "2026-04-21"
+keywords:
+  - Crossrail
+  - Elizabeth Line
+  - business case
+  - assumption drift
+  - transport infrastructure
+  - UK major programmes
+  - cost overrun
+  - passenger demand forecast
+  - retrospective analysis
+abstract: >-
+  A public-data retrospective drift analysis of the five operational
+  assumptions in the 2011 Crossrail business case, scored against
+  outturn data thirteen years later. Compares the original published
+  baselines (construction cost envelope, annual passenger demand,
+  fare revenue trajectory, benefit-cost ratio, and value-for-money
+  band) to current outturn values from ONS, ORR, TfL, and other
+  public statutory sources. Uses the open-source PDA Platform.
+preferred-citation:
+  type: report
+  title: "Crossrail retrospective drift analysis"
+  authors:
+    - family-names: Newman
+      given-names: Ant
+      affiliation: "TortoiseAI"
+      orcid: "https://orcid.org/0000-0002-8612-3647"
+  year: 2026
+  publisher: "TortoiseAI"
+  location: "London, United Kingdom"
+references:
+  - type: software
+    title: "PDA Platform"
+    authors:
+      - family-names: Newman
+        given-names: Ant
+        affiliation: "TortoiseAI"
+    url: "https://github.com/antnewman/pda-platform"
