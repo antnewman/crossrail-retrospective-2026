@@ -85,7 +85,55 @@ Cash overrun headlines (here +28% vs the 2010 budget, the PAC framing) conflate 
 
 ## Assumption 2: passenger_journeys_full_opening
 
-[populated during session]
+**Method applied:** Headline direct count comparison. No deflator. Baseline 200,000,000 (2011 business case rounded forecast, "full opening steady state") compared against ORR 2024/25 outturn 242,866,594.
+
+**Observations used:**
+- `crossrail_retrospective.assumptions.value = 200,000,000` (passenger_journeys_full_opening, baseline_date 2011-07-01, unit count) [baseline]
+- `ORR-EL-JOURNEYS @ 2025-03-31 = 242.866594 million = 242,866,594` (fiscal year April 2024 to March 2025, provisional per ORR, loaded from ORR Table 1223a) [comparison]
+
+**Formula:**
+```
+drift_absolute = 242,866,594 - 200,000,000 = 42,866,594
+drift_percent = drift_absolute / 200,000,000 × 100 = 21.4333%
+```
+
+**Decisions made:**
+
+- **Single row, headline drift only.**
+  - Alternatives considered: two-component decomposition per caveat 2 (pre-pandemic trend drift vs post-pandemic recovery); defer entire calculation until a London rail proxy is loaded.
+  - Decision: single headline row, with caveat 2 decomposition deferred as a follow-up unit.
+  - Reasoning: proper caveat 2 decomposition requires a London rail proxy series (e.g. ORR TfL Underground annual journeys, or a comparable TOC journeys series) for 2011-2019 to estimate the no-pandemic counterfactual. No such proxy is loaded. Attempting an ad-hoc decomposition with the GB total series (Table 1220) risks producing a defensible-looking but methodologically weak number. The headline drift is publishable with the decomposition-deferred caveat clearly stated.
+
+- **Unit alignment: store comparison in absolute count, not millions.**
+  - Alternatives considered: store in millions to match the ORR series unit; store in absolute count to match the assumption unit.
+  - Decision: absolute count.
+  - Reasoning: the drift row's `assumption_id` links to an assumption with `unit = count`; readers will naturally read the drift in the assumption's unit. 242.866594 × 1,000,000 = 242,866,594 exactly, so precision is preserved.
+
+- **Date semantics: original dates on the row (no price base here).**
+  - Reasoning: no deflator, so no price base question. `baseline_date = 2011-07-01` (assumption) and `comparison_date = 2025-03-31` (observation). Straightforward.
+
+**Caveats applied:**
+
+- Caveat 2 (pandemic as break in demand series): decomposition deferred. Captured as an open question below.
+- Ramp-up non-completion (informal caveat not in the formal three): 2024/25 is year three of operation; the 2011 forecast is "at full opening, steady state". 2024/25 demand is still growing per the assumption's own description. The +21.4% headline likely UNDERSTATES the eventual drift between forecast and realised steady-state demand.
+- Caveat 3 (multiple restated business cases): acknowledged. No intermediate restated forecast is used.
+
+**Drift result:**
+
+- Residual: +42,866,594 journeys, +21.4333%.
+- Direction: positive (outturn exceeds forecast). Robust.
+- Magnitude: understates eventual steady-state drift per the ramp-up caveat. The +21.4% is a lower bound on the eventual figure.
+
+**Confidence:** medium. Arithmetic exact. Direction robust. Magnitude directionally understated for the steady-state comparison.
+
+**Notes for methodology.md:**
+
+- Caveat 2 decomposition requires a proxy London rail series that is out of scope for this session. methodology.md should describe the decomposition approach and flag the series dependency.
+- Rail demand forecasts at "full opening steady state" are typically compared against ramping-up outturn; methodology.md should describe whether the investigation reports "drift at observation date" (simple, understates for programmes in ramp-up) or "projected drift at steady state" (requires ramp modelling).
+
+**What this tells us about drift patterns more generally:**
+
+Demand forecasts stated "at steady state" can be **over-performed** in the headline comparison yet still **understate** the real drift, if the outturn is measured during an ongoing ramp-up. For long-ramp programmes (rail, power, large-footprint retail), a drift analysis that compares a steady-state forecast against a non-steady-state outturn systematically understates positive drift and may overstate negative drift. The direction of the finding may be robust, but the magnitude is sensitive to ramp-completion timing. This is a distinct axis of methodology risk from the nominal-vs-real framing issue that appears in cost drift.
 
 ## Assumption 3: revenue_2024_25
 
@@ -107,4 +155,7 @@ Cash overrun headlines (here +28% vs the 2010 budget, the PAC framing) conflate 
 
 ## Open questions
 
-[methodological questions surfaced during the session but not resolved]
+**Question:** Caveat 2 (pandemic as break in demand series) decomposition for assumption 2: how should pre-pandemic trend drift (2011 forecast to a counterfactual 2024/25) be separated from post-pandemic recovery drift (2020 to 2025)?
+**Arose during:** assumption 2 (passenger_journeys_full_opening).
+**Why it matters:** the +21.4% headline drift conflates the two components. A reader wanting to attribute drift causes cannot do so from the headline alone. The decomposition is required by INVESTIGATION_BRIEF.md caveat 2.
+**Provisional handling:** no decomposition performed this session; headline drift row written with the deferral and its reasoning recorded in the row's `notes` field. A London rail proxy series (e.g. ORR TfL Underground annual journeys, or a comparable TOC journeys series) for 2011-2019 needs to be loaded first. Follow-up unit of work: load the proxy, compute the 2011-2019 trend, project it to 2024/25 without pandemic, and compare against actual 2024/25 (242.866594m) to decompose drift into trend and recovery components.
