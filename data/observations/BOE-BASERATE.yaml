@@ -1,0 +1,200 @@
+# Observations for series BOE-BASERATE
+# Bank of England official Bank Rate, event-driven
+# Each entry maps to one row in pda_shared.external_observations
+# This series is shared with the mtd_2026 investigation; one load serves both cases
+
+series_code: BOE-BASERATE
+unit: percent
+frequency: event_driven
+observation_date_convention: rate-change effective date (first day the new rate applies)
+event_driven_semantics: >
+  Each row's value persists from observation_date until the day before the
+  observation_date of the next row. The current (most recent) row's rate
+  continues until a subsequent MPC decision is loaded as a new row with a
+  later captured_at.
+
+source:
+  publication: "BoE IADB (Interactive Statistical Database)"
+  series_identifier: IUDBEDR
+  export_url: "https://www.bankofengland.co.uk/boeapps/iadb/fromshowcolumns.asp?csv.x=yes&Datefrom=01/Jan/2000&Dateto=30/Apr/2026&SeriesCodes=IUDBEDR&UsingCodes=Y&VPD=Y&VFD=N"
+  human_readable_page: "https://www.bankofengland.co.uk/monetary-policy/the-interest-rate-bank-rate"
+  export_date: 2026-04-21
+  raw_response_shape: "daily, 6644 rows from 2000-01-04 to 2026-04-20"
+  filter_applied: "rate-change events only (edges of the step function), 57 of 6644 rows retained"
+
+role_in_investigation: >
+  Discount rate sensitivity for the BCR restatement (methodology.md
+  section 6.5). Ancillary rather than primary.
+
+observations:
+  - observation_date: 2000-01-04
+    value: 5.5
+    event_type: starting_observation
+  - observation_date: 2000-01-13
+    value: 5.75
+    event_type: rate_change
+  - observation_date: 2000-02-10
+    value: 6
+    event_type: rate_change
+  - observation_date: 2001-02-08
+    value: 5.75
+    event_type: rate_change
+  - observation_date: 2001-04-05
+    value: 5.5
+    event_type: rate_change
+  - observation_date: 2001-05-10
+    value: 5.25
+    event_type: rate_change
+  - observation_date: 2001-08-02
+    value: 5
+    event_type: rate_change
+  - observation_date: 2001-09-18
+    value: 4.75
+    event_type: rate_change
+  - observation_date: 2001-10-04
+    value: 4.5
+    event_type: rate_change
+  - observation_date: 2001-11-08
+    value: 4
+    event_type: rate_change
+  - observation_date: 2003-02-06
+    value: 3.75
+    event_type: rate_change
+  - observation_date: 2003-07-10
+    value: 3.5
+    event_type: rate_change
+  - observation_date: 2003-11-06
+    value: 3.75
+    event_type: rate_change
+  - observation_date: 2004-02-05
+    value: 4
+    event_type: rate_change
+  - observation_date: 2004-05-06
+    value: 4.25
+    event_type: rate_change
+  - observation_date: 2004-06-10
+    value: 4.5
+    event_type: rate_change
+  - observation_date: 2004-08-05
+    value: 4.75
+    event_type: rate_change
+  - observation_date: 2005-08-04
+    value: 4.5
+    event_type: rate_change
+  - observation_date: 2006-08-03
+    value: 4.75
+    event_type: rate_change
+  - observation_date: 2006-11-09
+    value: 5
+    event_type: rate_change
+  - observation_date: 2007-01-11
+    value: 5.25
+    event_type: rate_change
+  - observation_date: 2007-05-10
+    value: 5.5
+    event_type: rate_change
+  - observation_date: 2007-07-05
+    value: 5.75
+    event_type: rate_change
+  - observation_date: 2007-12-06
+    value: 5.5
+    event_type: rate_change
+  - observation_date: 2008-02-07
+    value: 5.25
+    event_type: rate_change
+  - observation_date: 2008-04-10
+    value: 5
+    event_type: rate_change
+  - observation_date: 2008-10-08
+    value: 4.5
+    event_type: rate_change
+  - observation_date: 2008-11-06
+    value: 3
+    event_type: rate_change
+  - observation_date: 2008-12-04
+    value: 2
+    event_type: rate_change
+  - observation_date: 2009-01-08
+    value: 1.5
+    event_type: rate_change
+  - observation_date: 2009-02-05
+    value: 1
+    event_type: rate_change
+  - observation_date: 2009-03-05
+    value: 0.5
+    event_type: rate_change
+  - observation_date: 2016-08-04
+    value: 0.25
+    event_type: rate_change
+  - observation_date: 2017-11-02
+    value: 0.5
+    event_type: rate_change
+  - observation_date: 2018-08-02
+    value: 0.75
+    event_type: rate_change
+  - observation_date: 2020-03-11
+    value: 0.25
+    event_type: rate_change
+  - observation_date: 2020-03-19
+    value: 0.1
+    event_type: rate_change
+  - observation_date: 2021-12-16
+    value: 0.25
+    event_type: rate_change
+  - observation_date: 2022-02-03
+    value: 0.5
+    event_type: rate_change
+  - observation_date: 2022-03-17
+    value: 0.75
+    event_type: rate_change
+  - observation_date: 2022-05-05
+    value: 1
+    event_type: rate_change
+  - observation_date: 2022-06-16
+    value: 1.25
+    event_type: rate_change
+  - observation_date: 2022-08-04
+    value: 1.75
+    event_type: rate_change
+  - observation_date: 2022-09-22
+    value: 2.25
+    event_type: rate_change
+  - observation_date: 2022-11-03
+    value: 3
+    event_type: rate_change
+  - observation_date: 2022-12-15
+    value: 3.5
+    event_type: rate_change
+  - observation_date: 2023-02-02
+    value: 4
+    event_type: rate_change
+  - observation_date: 2023-03-23
+    value: 4.25
+    event_type: rate_change
+  - observation_date: 2023-05-11
+    value: 4.5
+    event_type: rate_change
+  - observation_date: 2023-06-22
+    value: 5
+    event_type: rate_change
+  - observation_date: 2023-08-03
+    value: 5.25
+    event_type: rate_change
+  - observation_date: 2024-08-01
+    value: 5
+    event_type: rate_change
+  - observation_date: 2024-11-07
+    value: 4.75
+    event_type: rate_change
+  - observation_date: 2025-02-06
+    value: 4.5
+    event_type: rate_change
+  - observation_date: 2025-05-08
+    value: 4.25
+    event_type: rate_change
+  - observation_date: 2025-08-07
+    value: 4
+    event_type: rate_change
+  - observation_date: 2025-12-18
+    value: 3.75
+    event_type: continuing
