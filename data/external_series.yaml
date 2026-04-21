@@ -9,7 +9,7 @@ series:
     series_name: "Construction Output Price Index: Infrastructure, new work"
     provider: "ONS"
     unit: index_2015_100
-    frequency: quarterly
+    frequency: monthly
     lag_days: 45
     status: accredited
     source_url: "https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/datasets/interimconstructionoutputpriceindices"

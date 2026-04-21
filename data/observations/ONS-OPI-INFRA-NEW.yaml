@@ -1,0 +1,315 @@
+# Observations for series ONS-OPI-INFRA-NEW
+# ONS Construction Output Price Index, Infrastructure new work, monthly, 2015=100
+# Each entry maps to one row in pda_shared.external_observations (series_id resolved by series_code at load time)
+
+series_code: ONS-OPI-INFRA-NEW
+unit: index_2015_100
+frequency: monthly
+observation_date_convention: end-of-month
+
+source:
+  publication: "ONS Construction Output Price Indices Q4 (Oct-Dec) 2025 release"
+  release_date: 2026-02-12
+  workbook: bulletindataset9.xlsx
+  workbook_url: "https://www.ons.gov.uk/file?uri=/businessindustryandtrade/constructionindustry/datasets/interimconstructionoutputpriceindices/current/bulletindataset9.xlsx"
+  dataset_landing_page: "https://www.ons.gov.uk/businessindustryandtrade/constructionindustry/datasets/interimconstructionoutputpriceindices"
+  sheet: "New work"
+  column: "Infrastructure index 2015=100"
+
+pre_2014_gap_note: >
+  This series begins 2014-01 (ONS current 2015=100 base). Pre-2014 values
+  are held in the superseded BIS OPI series with ONS-published linking
+  factors. For reprice of assumptions with pre-2014 baseline dates (for
+  example, the 2011 Crossrail baseline), the BIS linked series must be
+  applied at drift-calculation time. See methodology.md section 6.1 and
+  caveat 1.
+
+observations:
+  - observation_date: 2014-01-31
+    value: 100.2
+  - observation_date: 2014-02-28
+    value: 99.2
+  - observation_date: 2014-03-31
+    value: 98.7
+  - observation_date: 2014-04-30
+    value: 98.4
+  - observation_date: 2014-05-31
+    value: 98.4
+  - observation_date: 2014-06-30
+    value: 99.5
+  - observation_date: 2014-07-31
+    value: 99.9
+  - observation_date: 2014-08-31
+    value: 99.1
+  - observation_date: 2014-09-30
+    value: 99.7
+  - observation_date: 2014-10-31
+    value: 99.8
+  - observation_date: 2014-11-30
+    value: 99.7
+  - observation_date: 2014-12-31
+    value: 98.6
+  - observation_date: 2015-01-31
+    value: 98.6
+  - observation_date: 2015-02-28
+    value: 99.5
+  - observation_date: 2015-03-31
+    value: 100.6
+  - observation_date: 2015-04-30
+    value: 99.5
+  - observation_date: 2015-05-31
+    value: 99.6
+  - observation_date: 2015-06-30
+    value: 100
+  - observation_date: 2015-07-31
+    value: 100.7
+  - observation_date: 2015-08-31
+    value: 100
+  - observation_date: 2015-09-30
+    value: 100
+  - observation_date: 2015-10-31
+    value: 100.5
+  - observation_date: 2015-11-30
+    value: 100.9
+  - observation_date: 2015-12-31
+    value: 100.1
+  - observation_date: 2016-01-31
+    value: 101
+  - observation_date: 2016-02-29
+    value: 101.2
+  - observation_date: 2016-03-31
+    value: 101.7
+  - observation_date: 2016-04-30
+    value: 101.7
+  - observation_date: 2016-05-31
+    value: 101.6
+  - observation_date: 2016-06-30
+    value: 102
+  - observation_date: 2016-07-31
+    value: 100.6
+  - observation_date: 2016-08-31
+    value: 100.5
+  - observation_date: 2016-09-30
+    value: 100.5
+  - observation_date: 2016-10-31
+    value: 101
+  - observation_date: 2016-11-30
+    value: 101.6
+  - observation_date: 2016-12-31
+    value: 101
+  - observation_date: 2017-01-31
+    value: 101.2
+  - observation_date: 2017-02-28
+    value: 101.2
+  - observation_date: 2017-03-31
+    value: 100.8
+  - observation_date: 2017-04-30
+    value: 100.8
+  - observation_date: 2017-05-31
+    value: 101.7
+  - observation_date: 2017-06-30
+    value: 101.7
+  - observation_date: 2017-07-31
+    value: 102.3
+  - observation_date: 2017-08-31
+    value: 102.6
+  - observation_date: 2017-09-30
+    value: 102.9
+  - observation_date: 2017-10-31
+    value: 102.8
+  - observation_date: 2017-11-30
+    value: 103
+  - observation_date: 2017-12-31
+    value: 103.3
+  - observation_date: 2018-01-31
+    value: 103.5
+  - observation_date: 2018-02-28
+    value: 103.5
+  - observation_date: 2018-03-31
+    value: 104.8
+  - observation_date: 2018-04-30
+    value: 105.1
+  - observation_date: 2018-05-31
+    value: 105.5
+  - observation_date: 2018-06-30
+    value: 105.8
+  - observation_date: 2018-07-31
+    value: 105.8
+  - observation_date: 2018-08-31
+    value: 105.6
+  - observation_date: 2018-09-30
+    value: 106.1
+  - observation_date: 2018-10-31
+    value: 106.1
+  - observation_date: 2018-11-30
+    value: 107.1
+  - observation_date: 2018-12-31
+    value: 107
+  - observation_date: 2019-01-31
+    value: 107.3
+  - observation_date: 2019-02-28
+    value: 108.4
+  - observation_date: 2019-03-31
+    value: 109.1
+  - observation_date: 2019-04-30
+    value: 109.8
+  - observation_date: 2019-05-31
+    value: 110.4
+  - observation_date: 2019-06-30
+    value: 112.2
+  - observation_date: 2019-07-31
+    value: 112.8
+  - observation_date: 2019-08-31
+    value: 112.9
+  - observation_date: 2019-09-30
+    value: 111.6
+  - observation_date: 2019-10-31
+    value: 110.8
+  - observation_date: 2019-11-30
+    value: 110.9
+  - observation_date: 2019-12-31
+    value: 110.9
+  - observation_date: 2020-01-31
+    value: 111.3
+  - observation_date: 2020-02-29
+    value: 111.1
+  - observation_date: 2020-03-31
+    value: 111.4
+  - observation_date: 2020-04-30
+    value: 111.5
+  - observation_date: 2020-05-31
+    value: 111.4
+  - observation_date: 2020-06-30
+    value: 111.9
+  - observation_date: 2020-07-31
+    value: 112.2
+  - observation_date: 2020-08-31
+    value: 112
+  - observation_date: 2020-09-30
+    value: 112.2
+  - observation_date: 2020-10-31
+    value: 112.5
+  - observation_date: 2020-11-30
+    value: 114.7
+  - observation_date: 2020-12-31
+    value: 114.9
+  - observation_date: 2021-01-31
+    value: 115.4
+  - observation_date: 2021-02-28
+    value: 115.8
+  - observation_date: 2021-03-31
+    value: 114.2
+  - observation_date: 2021-04-30
+    value: 114.6
+  - observation_date: 2021-05-31
+    value: 115.3
+  - observation_date: 2021-06-30
+    value: 115.8
+  - observation_date: 2021-07-31
+    value: 116.3
+  - observation_date: 2021-08-31
+    value: 116.7
+  - observation_date: 2021-09-30
+    value: 117.1
+  - observation_date: 2021-10-31
+    value: 118.7
+  - observation_date: 2021-11-30
+    value: 118.5
+  - observation_date: 2021-12-31
+    value: 118.1
+  - observation_date: 2022-01-31
+    value: 119.9
+  - observation_date: 2022-02-28
+    value: 119.8
+  - observation_date: 2022-03-31
+    value: 120.7
+  - observation_date: 2022-04-30
+    value: 123.7
+  - observation_date: 2022-05-31
+    value: 133.3
+  - observation_date: 2022-06-30
+    value: 133.6
+  - observation_date: 2022-07-31
+    value: 133.5
+  - observation_date: 2022-08-31
+    value: 132.5
+  - observation_date: 2022-09-30
+    value: 133.7
+  - observation_date: 2022-10-31
+    value: 134.7
+  - observation_date: 2022-11-30
+    value: 134.7
+  - observation_date: 2022-12-31
+    value: 133.9
+  - observation_date: 2023-01-31
+    value: 135.6
+  - observation_date: 2023-02-28
+    value: 136.7
+  - observation_date: 2023-03-31
+    value: 138
+  - observation_date: 2023-04-30
+    value: 138.4
+  - observation_date: 2023-05-31
+    value: 138.9
+  - observation_date: 2023-06-30
+    value: 139
+  - observation_date: 2023-07-31
+    value: 138.7
+  - observation_date: 2023-08-31
+    value: 138.2
+  - observation_date: 2023-09-30
+    value: 136.5
+  - observation_date: 2023-10-31
+    value: 136
+  - observation_date: 2023-11-30
+    value: 136.9
+  - observation_date: 2023-12-31
+    value: 136.2
+  - observation_date: 2024-01-31
+    value: 136.7
+  - observation_date: 2024-02-29
+    value: 137.8
+  - observation_date: 2024-03-31
+    value: 137.7
+  - observation_date: 2024-04-30
+    value: 139.9
+  - observation_date: 2024-05-31
+    value: 140.8
+  - observation_date: 2024-06-30
+    value: 140.8
+  - observation_date: 2024-07-31
+    value: 140.9
+  - observation_date: 2024-08-31
+    value: 140.8
+  - observation_date: 2024-09-30
+    value: 141.5
+  - observation_date: 2024-10-31
+    value: 142.4
+  - observation_date: 2024-11-30
+    value: 141.6
+  - observation_date: 2024-12-31
+    value: 141.1
+  - observation_date: 2025-01-31
+    value: 142.2
+  - observation_date: 2025-02-28
+    value: 142.7
+  - observation_date: 2025-03-31
+    value: 143.2
+  - observation_date: 2025-04-30
+    value: 143.6
+  - observation_date: 2025-05-31
+    value: 144
+  - observation_date: 2025-06-30
+    value: 143.9
+  - observation_date: 2025-07-31
+    value: 144.2
+  - observation_date: 2025-08-31
+    value: 144
+  - observation_date: 2025-09-30
+    value: 144.2
+  - observation_date: 2025-10-31
+    value: 144.3
+  - observation_date: 2025-11-30
+    value: 143.5
+  - observation_date: 2025-12-31
+    value: 144.5
