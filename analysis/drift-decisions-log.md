@@ -451,3 +451,35 @@ The methodology and the drift calculations produced from it were reviewed on 202
 **Formal write-up:** pending. The reviewer indicated at the time of verbal approval that a formal write-up will follow. When received, it will be recorded in `pda_shared.reviews`. Reviewer metadata sits in `pda_shared.reviewers` (service-role only, `consent_to_name = false`).
 
 **Publication gate:** remains closed until the formal write-up is recorded in `pda_shared.reviews`. Findings drafted in the subsequent findings session are inserted into `crossrail_retrospective.findings` with `published = false`. They become publishable when the formal review row lands.
+
+---
+
+## Findings drafting
+
+### Finding 1: cost_real_terms_residual
+
+**Drafted:** 2026-04-22.
+**Finding id in Supabase:** `28fe3fe9-f5e5-4f6d-b8ec-5553fc1bac4c`.
+**Published:** false (publication gated on formal review write-up).
+**Title:** *Crossrail's real-terms cost overrun is approximately £2.5-3.7bn, smaller than the 28% cash headline*.
+**Supporting drift rows:** `87ef17ea-3163-4998-aa06-5fbb74d29461` (assumption 1 Row A, unadjusted, +24.75%) and `eca92970-94a6-470c-a4e5-f29ed1f3807b` (assumption 1 Row B, 7.5% pre-2014 correction, +16.05%).
+**Confidence:** medium. Direction robust; magnitude bounded by the pre-2014 correction range (not by the ONS vs BCIS index choice, which is flagged as a separate constraint in the caveats).
+
+**Drafting decisions:**
+
+- **Title choice.** Three candidates considered; Option A ("Crossrail's real-terms cost overrun is approximately £2.5-3.7bn, smaller than the 28% cash headline") selected because it quantifies the real-terms residual and contrasts directly against the PAC 2021 cash-overrun figure in the public record. Option B emphasised the inflation fraction; Option C was a shorthand without the cash-overrun contrast.
+- **Arithmetic correction caught during drafting.** The original Step 3 proposal framed the headline as "approximately three-quarters explained by construction inflation". That was arithmetically backwards: the inflation component is 10-40% of the cash overrun, not three-quarters, and the real-terms component is 60-90%. The error was caught and the title reframed before any draft landed in the database. Recorded here as a discipline reminder: framing direction must be verified against the arithmetic before any headline is proposed. The check applies to every subsequent finding.
+- **Opening paragraph reordering.** First draft led with the PAC cash overrun figure as the opening sentence. Revised at Ant's direction to lead with the finding (the real-terms residual range) and use the cash figure as context. Rationale: a journalist quoting the finding should quote the investigation's conclusion, not the public-record figure the investigation is qualifying.
+- **Magnitude field scope.** Short form ("residual of £2.5bn to £3.7bn (+15% to +25%) in real terms against the 2010-11 baseline") stored in the structured field. The cash-overrun contextualisation lives in the narrative, not in the structured field.
+
+**Arithmetic checks performed before insertion:**
+
+- Real / cash overrun ratio: Row A 24.75/28 = 88.4%; Row B 16.05/28 = 57.3%. Range "60-90% real, 10-40% inflation" used in the narrative rounds from the computed 57-88%.
+- Drift row reconciliation: Row A residual £3,663,709,875.03 and Row B residual £2,553,709,875.03 reconcile to the reported "£2.5bn to £3.7bn" range.
+- Outturn figure £18.8bn matches the NAO-CROSSRAIL-2021 citation in both drift rows' notes.
+
+**Notes for article drafting and for the reviewer:**
+
+- Candidate article opener. The contrast with PAC 2021 framing is the narrative hook.
+- The ONS-OPI vs BCIS-TPI caveat is the one most likely to be pressed by a programme-assurance reviewer. The caveats field carries the full position.
+- The range (£2.5bn to £3.7bn) is a real analytical range, not a rhetorical hedge; both rows are co-equal drift calculations with different pre-2014 treatments, not a best-estimate plus sensitivity.
