@@ -437,3 +437,17 @@ All recorded under "Open questions" above. Summary:
 - Section 6.1 needs revision to reflect the corrected deflation method. This is a cross-cutting decision already recorded above. The update should be a small separate commit on its own branch once the corrected method is finalised.
 
 ### End of session.
+
+---
+
+## Independent review
+
+The methodology and the drift calculations produced from it were reviewed on 2026-04-22 by an independent domain expert in public-sector programme assurance, consistent with the reviewer profile set out in `methodology.md` §6.1 and `INVESTIGATION_BRIEF.md`'s review-and-attribution section.
+
+**Review date (verbal approval):** 2026-04-22.
+
+**Review outcome:** clean approval, no material changes requested.
+
+**Formal write-up:** pending. The reviewer indicated at the time of verbal approval that a formal write-up will follow. When received, it will be recorded in `pda_shared.reviews`. Reviewer metadata sits in `pda_shared.reviewers` (service-role only, `consent_to_name = false`).
+
+**Publication gate:** remains closed until the formal write-up is recorded in `pda_shared.reviews`. Findings drafted in the subsequent findings session are inserted into `crossrail_retrospective.findings` with `published = false`. They become publishable when the formal review row lands.
