@@ -1,0 +1,67 @@
+# Observations for series TFL-EL-REVENUE
+# TfL Elizabeth line passenger income (£m), annual, fiscal year ending 31 March
+# Each entry maps to one row in pda_shared.external_observations (series_id resolved by series_code at load time)
+
+series_code: TFL-EL-REVENUE
+unit: gbp_millions
+frequency: annual
+observation_date_convention: end-of-fiscal-year
+
+source:
+  publication: "TfL Quarterly Performance Reports (Q4 for each fiscal year), Elizabeth line financial summary tables"
+  publisher: "Transport for London"
+  status: "Quarterly performance reporting, not the audited Annual Report. Subsequent audited figures could revise."
+
+definitional_flag:
+  value_label: "Passenger income (Elizabeth line)"
+  question: >
+    The TfL QPR "Passenger income" line for the Elizabeth line appears to be
+    gross passenger income attributed to the Elizabeth line. The definitional
+    match against the 2019 TfL Business Plan forecast of £1.037bn (which
+    anchors assumption revenue_2024_25) has not been independently verified.
+  recommendation: >
+    Before a finding is drafted from the assumption 3 drift row that uses
+    these observations, the definitional match between QPR "Passenger income"
+    and the 2019 Business Plan forecast category should be verified either
+    by a direct reading of the 2019 plan's definitional footnotes or by
+    independent domain review. Flag for methodology review.
+
+partial_first_year_caveat:
+  applies_to_observation: 2023-03-31
+  detail: >
+    The Elizabeth line opened to passengers 24 May 2022. The 2022/23 fiscal
+    year therefore covers approximately 10.3 months of Elizabeth line branded
+    operation plus approximately six weeks (April through 23 May 2022) of the
+    TfL Rail predecessor service. The observation is useful as a trajectory
+    data point and for constructing pre-steady-state comparisons but should
+    not be treated as a steady-state value or be directly compared against
+    a full-year steady-state forecast without adjustment.
+
+observations:
+  - observation_date: 2023-03-31
+    value: 314
+    fiscal_year: "Apr 2022 to Mar 2023"
+    source_document: "TfL Quarterly Performance Report Q4 2022/23"
+    source_url: "https://content.tfl.gov.uk/tfl-quarterly-performance-report-q4-2022-23-acc.pdf"
+    tfl_exact_phrasing: '"Passenger income 314" in the full-year 2022/23 column of the Elizabeth line financial summary table'
+    tfl_commentary: "Passenger income is £30m better than budget, driven by three million more passenger journeys than expected. The new transformational service has had [strong demand]."
+    partial_first_year: true
+
+  - observation_date: 2024-03-31
+    value: 606
+    fiscal_year: "Apr 2023 to Mar 2024"
+    source_document: "TfL Quarterly Performance Report Q4 2023/24"
+    source_url: "https://content.tfl.gov.uk/qpr-q4-2023-24-acc.pdf"
+    tfl_exact_phrasing: '"Passenger income 606" in the full-year 2023/24 column; prior-year comparator "314" for 2022/23'
+    tfl_commentary: "Passenger income is £72m higher than Budget, driven by better-than-expected yield. Operating costs are £19m better than Budget."
+    partial_first_year: false
+
+  - observation_date: 2025-03-31
+    value: 652
+    fiscal_year: "Apr 2024 to Mar 2025"
+    source_document: "TfL Quarterly Performance Report Q4 2024/25 (PUB25_029, published May 2025)"
+    source_url: "https://content.tfl.gov.uk/tfl-quarterly-performance-report-q4-2024-25.pdf"
+    source_page: 13
+    tfl_exact_phrasing: '"Passenger income 652" in the full-year 2024/25 column; budget column "669"; prior-year 2023/24 comparator "606"'
+    tfl_commentary: "Total revenue is within one per cent of Budget. Lower-than-expected passenger income was offset by other operating income being higher. Revenue increased by £59m on last year, reflecting growing passenger demand."
+    partial_first_year: false
