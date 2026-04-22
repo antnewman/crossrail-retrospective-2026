@@ -130,14 +130,32 @@ produces the same row.
 Detailed method will be set out in `methodology.md` at repository root,
 with section numbers corresponding to each assumption. High level:
 
-**1. Construction cost reprice (primary).** The £14.8bn envelope in
-2010-2011 prices is repriced to a current-price equivalent using the ONS
-Construction OPI (Infrastructure) from the baseline year to 2025. This
-gives an "if nothing else had changed" comparison point. The actual
-outturn (approximately £18.8bn by 2020, with subsequent minor additions)
-is then compared to the repriced baseline. The difference between repriced
-baseline and outturn is the portion of the overrun that cannot be
-attributed to construction sector inflation.
+**1. Construction cost, real-terms comparison (primary).** The £14.8bn
+2010-2011 baseline and the approximately £18.8bn cash outturn (NAO 2021)
+are compared in a single common price base, so that the difference reflects
+real-terms drift rather than construction-sector inflation. The default
+approach expresses both sides in January 2014 prices. The cash outturn is
+deflated back from its (approximate) spend midpoint to January 2014 prices.
+The deflator is ONS-OPI-INFRA-NEW[2014-01] divided by the mean of the
+twelve calendar-2017 monthly index values, where calendar 2017 is used as
+the spend-weighted midpoint of the 2014-2019 programme spend. This puts
+the outturn and the 2010-2011 baseline in a single common price base. The
+pre-2014 construction-inflation gap (from the assumption's 2011-07 baseline
+to the 2014-01 ONS base) is an explicit modelling choice: either unadjusted
+(baseline taken as-is, with the January 2014 index used as proxy for
+2010-11 prices) or rolled forward with a cumulative correction in the
+plausible range 5-10%, with 7.5% as a defensible midpoint (approximately
+2.9% annual compound inflation over 2.5 years, consistent with the publicly
+documented BIS Construction Output Price Index trajectory for 2011-2014).
+Both treatments are reported as co-equal rows in
+`crossrail_retrospective.drift_calculations`. The residual (outturn minus
+baseline, in the common price base) is the portion of the cash overrun
+that cannot be attributed to construction-sector inflation. This method
+supersedes an earlier one-sided specification (reprice of baseline to
+current prices, comparing against outturn in cash) that produced
+direction-sensitive results and was revised during the first drift
+calculations session; the full reasoning is in the Cross-cutting decisions
+section of `analysis/drift-decisions-log.md`.
 
 **2. Passenger demand comparison.** The 200 million annual journey
 assumption is compared to the actual ORR figure for 2024-25 (242.9
