@@ -137,29 +137,69 @@ Demand forecasts stated "at steady state" can be **over-performed** in the headl
 
 ## Assumption 3: revenue_2024_25
 
-**Method applied:** Deferred this session. No drift row inserted for this assumption.
+Originally deferred in the first drift calculations session (see earlier entry in git history on branch `analysis/drift-calculations`). Ant Newman supplied three TfL primary-source values in a subsequent session; TFL-EL-REVENUE observations were loaded, and the drift calculation was performed on branch `analysis/drift-revenue`. This entry supersedes the deferral record.
 
-**Reason for deferral:** TFL-EL-REVENUE has 0 observations in pda_shared.external_observations. The series row exists in pda_shared.external_series but the TfL primary-source values for Elizabeth Line annual passenger income are pending Ant's data supply from TfL Annual Reports and Quarterly Progress Reports (PDFs, not directly parseable without manual extraction).
+**Method applied:** Direct comparison of the 2019 TfL Business Plan forecast of £1,037m for Elizabeth line passenger income in 2024/25 against the 2024/25 outturn reported in TfL Quarterly Performance Report Q4 2024/25. No deflator applied. Single drift row. Yield decomposition computed as supporting analysis in the row's notes field, not as a separate row.
 
-**Observations used:** none.
+**Observations used:**
+- `crossrail_retrospective.assumptions.value = 1,037,000,000` (revenue_2024_25, baseline_date 2019-12-17, unit gbp) [baseline]
+- `TFL-EL-REVENUE @ 2025-03-31 = 652 gbp_millions = 652,000,000 gbp` (fiscal year April 2024 to March 2025; TfL QPR Q4 2024/25 PUB25_029, Elizabeth line financial summary p.13) [comparison]
+- For yield decomposition in notes: `ORR-EL-JOURNEYS @ 2025-03-31 = 242,866,594` (actual 2024/25 demand); `2019 TfL Business Plan forecast demand for 2024/25 = 277,000,000` (quoted from source document notes for TFL-BUSINESS-PLAN-2019-12 in data/sources.yaml, not a loaded observation).
 
-**Provisional handling:** no drift row inserted. A rough out-of-session benchmark exists in the London Assembly cross-reference (LONDON-ASSEMBLY-EL-2025, which cites £606m Elizabeth Line passenger income for 2023/24). This figure is for a different fiscal year than the assumption's baseline comparison (2024/25) and is a secondary citation of TfL figures rather than a TfL primary source, so it is noted only as a rough benchmark and not inserted as a drift row. Using it to compute a provisional drift would risk being misread as a TfL-sourced comparison when it is not.
+**Formula:**
+```
+drift_absolute = 652,000,000 - 1,037,000,000 = -385,000,000
+drift_percent  = -385,000,000 / 1,037,000,000 × 100 = -37.1263%
 
-**What unblocks this calculation:** three TfL Annual Report values for Elizabeth Line annual passenger income for fiscal years 2022/23, 2023/24, and 2024/25, with primary TfL citations (document title, section, and date). Once supplied, these values load into TFL-EL-REVENUE via the same ingest pattern used for the other series (YAML provenance file + per-row SQL insert, committed together).
+Yield decomposition (notes only, not a separate drift row):
+  demand_ratio   = 242,866,594 / 277,000,000 = 0.8768  (-12.32%)
+  yield_forecast = 1,037m / 277m  = £3.744 per journey
+  yield_actual   =   652m / 243m  = £2.685 per journey
+  yield_ratio    = 2.685 / 3.744  = 0.7171  (-28.29%)
+  combined: demand_ratio × yield_ratio = 0.6287 = 1 − 0.3713 (reconciles to revenue drift)
+```
 
-**Follow-up:** separate small session once the three TfL values are supplied. Will produce one drift row (baseline £1.037bn December 2019 TfL Business Plan forecast for 2024/25, comparison 2024/25 TfL outturn). Similar shape to assumption 2 (direct comparison, no deflator required between a 2019 forecast and a 2024/25 outturn at the order-of-magnitude framing; a more rigorous version would deflate both to a common price year, but that is a Path B methodology refinement for later).
+**Decisions made:**
 
-**Caveats that will apply when the calculation is run:** Caveat 2 (pandemic break), per assumption description, because the December 2019 forecast was the last pre-pandemic published forecast and the comparison period is entirely post-pandemic.
+- **Single row, direct comparison, no deflator.**
+  - Alternatives considered: deflate both sides to a common price year (2019 forecast in 2019 prices; 2024/25 outturn in 2024/25 cash) for a real-terms restatement; insert the yield decomposition as two separate drift rows (demand-only and yield-only).
+  - Decision: single row with direct comparison; yield decomposition captured in notes.
+  - Reasoning: INVESTIGATION_BRIEF.md section 6.3 specifies direct comparison of forecast and actual in cash terms. A real-terms restatement is a Path B methodology refinement for a later unit. The yield decomposition is informative commentary rather than an independent drift finding; it shares the same comparison_date and same comparison_value (revenue outturn) as the headline drift, so separate rows would duplicate data.
 
-**Drift result:** pending.
+- **Dual-baseline explanation captured in notes.**
+  - Reasoning: assumption 2's drift row uses the 2011 Crossrail Business Case 200m demand "steady-state" forecast as the baseline; this revenue drift row uses the 2019 TfL Business Plan 277m forecast for 2024/25. Both are correct baselines for their respective assumptions. Without explicit explanation a reader could misread the +21% demand drift in assumption 2 and the -12% implied demand component in this row as contradictory. Notes capture the trajectory (2011 forecast → 2019 revised forecast → 2024/25 outturn) and instruct findings drafting to explain this rather than presenting only one number.
 
-**Confidence:** n/a (no calculation yet).
+- **Definitional flag preserved from the observation's notes.**
+  - Reasoning: the TfL QPR "Passenger income" line for the Elizabeth line is the value we compared against the 2019 plan's £1.037bn forecast. The definitional match between those two categories has not been independently verified. The drift row notes mark this as a methodology review question and state that the row is not suitable for use in a published finding until the match is verified.
 
-**Notes for methodology.md:** methodology.md should note explicitly that assumption 3 is a planned drift row pending data supply, not an omission. The London Assembly cross-reference provides a rough directional expectation (2023/24 outturn ~£606m vs forecast ramp ~£884m for 2023/24, suggesting a substantial negative drift). The 2024/25 comparison against the £1.037bn forecast is expected to be similarly negative, but precise figures must come from TfL primary sources.
+- **Confidence: medium.**
+  - Arithmetic is exact and reproducible. Headline drift is robust. Yield decomposition has a slight reproducibility discount because the 277m demand figure is from a source-document note rather than a loaded observation. Definitional flag is the main residual uncertainty.
+
+**Caveats applied:**
+
+- Caveat 2 (pandemic break in demand series): applies. The 2019 forecast was pre-pandemic; the outturn captures all pandemic and recovery effects on both yield and demand. A no-pandemic counterfactual for either component would require additional modelling not performed here.
+- Definitional flag on "Passenger income" (QPR) vs 2019 Business Plan forecast category. Captured in notes; needs independent verification before a finding is drafted.
+- Status: TfL QPR Q4 2024/25 is unaudited quarterly reporting. Subsequent audited figures from TfL's 2024/25 Annual Report could revise; revisions would load as new append-only rows with a later captured_at.
+- No deflator applied. Different price bases are implicit between the 2019 forecast and the 2024/25 outturn. Not corrected at this framing level per brief section 6.3.
+
+**Drift result:**
+
+- Headline: drift_absolute -£385m; drift_percent -37.1263%.
+- Yield decomposition: demand -12.32% vs 2019 plan forecast; yield per journey -28.29% vs 2019 plan implied yield; combined -37.13% (reconciles to the headline exactly).
+- Direction: negative, robust under the method as specified.
+
+**Confidence:** medium. Reasoning above.
+
+**Notes for methodology.md:**
+
+- methodology.md section 6.3 already specifies direct comparison of forecast and actual in cash terms; no rewrite needed.
+- methodology.md should explicitly describe the yield decomposition as the supporting analysis that the revenue drift row carries in its notes, and state that the 277m demand figure for 2024/25 is drawn from a source-document note rather than a loaded observation.
+- methodology.md should describe the dual-baseline issue (2011 Crossrail BC demand forecast vs 2019 TfL Business Plan demand forecast) and instruct that published findings reconcile the trajectory rather than presenting either number in isolation.
+- methodology.md should preserve the definitional flag on "Passenger income" from QPR, with a direct reference to the TfL 2019 Business Plan for the category definition.
 
 **What this tells us about drift patterns more generally:**
 
-Assumption 3's deferral is itself a data point about drift methodology: some primary sources (TfL PDFs in this case) are not readily programmatically ingestable without manual extraction, and a disciplined methodology should defer rather than substitute secondary citations. The cost of deferral is a gap in the drift panel; the cost of substitution would be a row that reads as "TfL data" when the provenance is a London Assembly research document. For cumulative cross-investigation comparison work, the distinction between primary and secondary sources must be rigid.
+Revenue drift on fare-funded public services is a multiplicative composition of demand drift (journey volumes) and yield drift (average fare per journey). A finding that reports only the aggregate revenue drift without the decomposition is under-specified: the two components have different causal drivers (demand reflects economic conditions, travel patterns, and service quality; yield reflects fare policy, ticket mix, and concession structures) and different policy implications. For any service with fare-setting flexibility, the decomposition is the finding.
 
 ## Assumption 4: benefit_cost_ratio_dft
 
