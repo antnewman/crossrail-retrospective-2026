@@ -437,3 +437,142 @@ All recorded under "Open questions" above. Summary:
 - Section 6.1 needs revision to reflect the corrected deflation method. This is a cross-cutting decision already recorded above. The update should be a small separate commit on its own branch once the corrected method is finalised.
 
 ### End of session.
+
+---
+
+## Independent review
+
+The methodology and the drift calculations produced from it were reviewed on 2026-04-22 by an independent domain expert in public-sector programme assurance, consistent with the reviewer profile set out in `methodology.md` §6.1 and `INVESTIGATION_BRIEF.md`'s review-and-attribution section.
+
+**Review date (verbal approval):** 2026-04-22.
+
+**Review outcome:** clean approval, no material changes requested.
+
+**Formal write-up:** pending. The reviewer indicated at the time of verbal approval that a formal write-up will follow. When received, it will be recorded in `pda_shared.reviews`. Reviewer metadata sits in `pda_shared.reviewers` (service-role only, `consent_to_name = false`).
+
+**Publication gate:** remains closed until the formal write-up is recorded in `pda_shared.reviews`. Findings drafted in the subsequent findings session are inserted into `crossrail_retrospective.findings` with `published = false`. They become publishable when the formal review row lands.
+
+---
+
+## Findings drafting
+
+### Finding 1: cost_real_terms_residual
+
+**Drafted:** 2026-04-22.
+**Finding id in Supabase:** `28fe3fe9-f5e5-4f6d-b8ec-5553fc1bac4c`.
+**Published:** false (publication gated on formal review write-up).
+**Title:** *Crossrail's real-terms cost overrun is approximately £2.5-3.7bn, smaller than the 28% cash headline*.
+**Supporting drift rows:** `87ef17ea-3163-4998-aa06-5fbb74d29461` (assumption 1 Row A, unadjusted, +24.75%) and `eca92970-94a6-470c-a4e5-f29ed1f3807b` (assumption 1 Row B, 7.5% pre-2014 correction, +16.05%).
+**Confidence:** medium. Direction robust; magnitude bounded by the pre-2014 correction range (not by the ONS vs BCIS index choice, which is flagged as a separate constraint in the caveats).
+
+**Drafting decisions:**
+
+- **Title choice.** Three candidates considered; Option A ("Crossrail's real-terms cost overrun is approximately £2.5-3.7bn, smaller than the 28% cash headline") selected because it quantifies the real-terms residual and contrasts directly against the PAC 2021 cash-overrun figure in the public record. Option B emphasised the inflation fraction; Option C was a shorthand without the cash-overrun contrast.
+- **Arithmetic correction caught during drafting.** The original Step 3 proposal framed the headline as "approximately three-quarters explained by construction inflation". That was arithmetically backwards: the inflation component is 10-40% of the cash overrun, not three-quarters, and the real-terms component is 60-90%. The error was caught and the title reframed before any draft landed in the database. Recorded here as a discipline reminder: framing direction must be verified against the arithmetic before any headline is proposed. The check applies to every subsequent finding.
+- **Opening paragraph reordering.** First draft led with the PAC cash overrun figure as the opening sentence. Revised at Ant's direction to lead with the finding (the real-terms residual range) and use the cash figure as context. Rationale: a journalist quoting the finding should quote the investigation's conclusion, not the public-record figure the investigation is qualifying.
+- **Magnitude field scope.** Short form ("residual of £2.5bn to £3.7bn (+15% to +25%) in real terms against the 2010-11 baseline") stored in the structured field. The cash-overrun contextualisation lives in the narrative, not in the structured field.
+
+**Arithmetic checks performed before insertion:**
+
+- Real / cash overrun ratio: Row A 24.75/28 = 88.4%; Row B 16.05/28 = 57.3%. Range "60-90% real, 10-40% inflation" used in the narrative rounds from the computed 57-88%.
+- Drift row reconciliation: Row A residual £3,663,709,875.03 and Row B residual £2,553,709,875.03 reconcile to the reported "£2.5bn to £3.7bn" range.
+- Outturn figure £18.8bn matches the NAO-CROSSRAIL-2021 citation in both drift rows' notes.
+
+**Notes for article drafting and for the reviewer:**
+
+- Candidate article opener. The contrast with PAC 2021 framing is the narrative hook.
+- The ONS-OPI vs BCIS-TPI caveat is the one most likely to be pressed by a programme-assurance reviewer. The caveats field carries the full position.
+- The range (£2.5bn to £3.7bn) is a real analytical range, not a rhetorical hedge; both rows are co-equal drift calculations with different pre-2014 treatments, not a best-estimate plus sensitivity.
+
+### Finding 2: revenue_shortfall_decomposition
+
+**Drafted:** 2026-04-22.
+**Finding id in Supabase:** `aa83b45e-8945-40b3-b50f-0870e8012045`.
+**Published:** false.
+**Title:** *Revenue shortfall decomposes: demand down 12%, yield down 28%*.
+**Supporting drift rows:** `cf423e0d-cd41-4625-b297-99679e447c7d` (assumption 3 single row, −37.13% revenue drift vs the 2019 TfL Business Plan forecast for 2024/25).
+**Confidence:** medium. Arithmetic exact; direction robust; residual uncertainty in the two caveats (definitional match, pandemic-era components).
+
+**Drafting decisions:**
+
+- **Title kept from Step 3 proposal.** "Revenue shortfall decomposes: demand down 12%, yield down 28%" is specific and directly replicable; the two numbers in the title let a reader match against the finding body without re-computing. No revision flagged.
+- **Multiplicative framing with additive sanity.** The decomposition is stated multiplicatively (demand ratio × yield ratio = revenue ratio) in both the narrative and the magnitude field. An additive cross-check ran before drafting: demand-only effect −£128m, yield-only effect −£293m, interaction +£36m, summing to −£385m. Yield dominance holds on both the ratio comparison (|−28.3%| > |−12.3%|) and the additive share (£293m ≈ 76% of the gap vs £128m ≈ 33%; interaction accounts for the balancing fraction). This cross-check is not in the narrative (multiplicative framing is cleaner for a reader) but is recorded here as part of the arithmetic discipline.
+- **Softened the pandemic causal claim.** First draft asserted that yield per journey was reduced by the pandemic-era shift toward off-peak and leisure travel. Revised at Ant's direction to hedge the claim ("may reflect ... including possible shifts toward off-peak and leisure travel") because the investigation does not directly substantiate the causal mechanism. The revision aligns with the explicit non-assertion of the fare-policy hypothesis elsewhere in the caveats paragraph.
+- **Removed "materially" from paragraph 1.** "Each journey generates materially less revenue" became "each journey generates less revenue". The numbers (£2.68 vs £3.74) carry the claim; the adjective was redundant.
+- **Causal hypothesis disclosed but not asserted.** The yield-dominant split points toward a fare-policy question (Mayoral fare freeze, Elizabeth Line fare structure relative to the Underground). The finding names this as a hypothesis that the investigation does not substantiate and flags it for Laura's review rather than asserting it.
+
+**Arithmetic checks performed before insertion:**
+
+- Multiplicative reconciliation at 10-decimal precision: 0.876775 × 0.717102 = 0.628746, matching 652/1037 = 0.628737 with a residual of 0.0000088 attributable to rounding in the two-decimal-place unit yield values used in the narrative. At the drift row's 6-decimal storage precision, reconciliation is exact.
+- Additive decomposition (sanity): demand-only −£127.8m, yield-only −£293.3m, interaction +£36.1m, sum −£385.0m, matches drift_absolute.
+- Yield dominance on both views: 28.3% > 12.3% in magnitude; 76% > 33% in additive share.
+
+**Notes for article drafting and for the reviewer:**
+
+- Likely second finding in the article, following finding 1 (the cost real-terms residual).
+- The definitional flag on "Passenger income" is the main thing Laura's formal review should verify.
+- The 277m demand figure used in the decomposition is from a source document note, not a loaded observation. A reader reproducing the decomposition from observations alone cannot reconstruct the split without loading TFL-BUSINESS-PLAN-2019-12's demand forecast as an observation (which would require separate extraction from the plan document). This is a known limitation of the current reproducibility path.
+
+### Finding 3: bcr_near_offset
+
+**Drafted:** 2026-04-22.
+**Finding id in Supabase:** `ded28030-def9-4244-a8ef-a67d1263dd59`.
+**Published:** false.
+**Title:** *Cost overrun and demand over-performance near-offset on value for money*.
+**Supporting drift rows:** six rows. Three BCR rows (`dbdb2a55-0b21-458a-8115-c1bb2f36d45e` nominal 1.883, `5a263b34-1b89-4727-b05e-87092168a30f` real no-correction 1.918, `3d89f5f1-e741-4cce-875d-0cc7b99d49cd` real 7.5% correction 2.061) and three band rows (`8897fe80-1018-4f11-88dd-d99555113ed8` band 2 from BCR 1.883, `3af9a0bb-90bf-434a-ac3d-dca697341df9` band 2 from BCR 1.918, `916d11c9-1bfa-4b3a-b519-9e07188f9104` band 3 from BCR 2.061).
+**Confidence:** low. Reflects the combined weight of the sensitivity-only framing, the benefits-linear-in-demand simplification, the inherited caveats 1 and 2, and the deferred Scenario B and caveat 2 decomposition. The low confidence is a methodological-level statement, not an arithmetic-uncertainty statement; the arithmetic is exact and the direction within the corrected method is robust.
+
+**Drafting decisions:**
+
+- **Title kept from Step 3.** "Cost overrun and demand over-performance near-offset on value for money". Specific and directional without overclaiming.
+- **Long-form length.** ~960 words, within the 800-1,200 target. Justified by the synthesis nature of the finding, the need to reconcile with finding 1 (the "tension"), the three co-equal scenarios each needing brief explanation, and the band-boundary sensitivity warranting prominent disclosure.
+- **Quantified band-boundary threshold.** Algebra worked out before drafting: the restated BCR crosses 2.0 at a pre-2014 correction of approximately 4.303%. The narrative rounds to "approximately 4.3%". The plausible 5-10% range all sits above this threshold; the critical observation is that the band outcome flips between nominal/no-correction (band 2) and any real-corrected variant within the plausible range (band 3).
+- **Tension with finding 1 framed as consistency, not contradiction.** First draft used "in tension in a useful way" which was informal. Revised at Ant's direction to "address different questions and are consistent with each other" which precisely names the relationship (cost-overrun finding and BCR-near-offset finding measure different things; both are true).
+- **Weak vs strong reading of the finding surfaced explicitly in the final paragraph.** The strong reading ("value-for-money categorisation has not clearly changed") is the investigation's finding. The weak reading ("remained on budget for value for money") is disclaimed with scare quotes; kept in because it is the kind of formulation that could appear in coverage if the finding were over-interpreted.
+- **supporting_drift_ids scope confirmed at six rows.** Per Step 3 approval: the three BCR rows and three band rows are the direct support. Upstream assumption 1 A/B rows and the assumption 2 row are referenced by ID inside the narrative and via the BCR rows' parent-row notes; they are not duplicated as direct supporting rows.
+- **Caveats field uses lettered enumeration (a-d).** Four caveats each carry weight; enumeration helps a reader check each one. Lettering mirrors the style used in finding 2's caveats field.
+
+**Arithmetic checks performed before insertion:**
+
+- Three BCR values reconcile to the formula `restated_BCR = 1.97 × 1.21433 / cost_ratio` using the three cost ratios from the Step 3 schema.
+- Midpoint of [1.883, 2.061] is 1.972; 1.97 is 0.002 off the exact arithmetic midpoint. Narrative says "almost exactly in the middle" — justified.
+- Band-crossing threshold: solving `2.0 = 1.97 × 1.21433 / cost_ratio` yields `cost_ratio = 1.19612`, which corresponds to `adjusted_baseline = £15.437bn`, which is `£14.8bn × 1.04303`. Pre-2014 correction of 4.303% is the boundary. Rounded to 4.3% in the narrative.
+- Directional sanity: each scenario's BCR drift direction matches the sign of (demand_ratio - cost_ratio). Nominal (cost 1.270 > demand 1.214): BCR down (-4.4%). Real no-correction (cost 1.248 > demand 1.214): BCR down (-2.7%). Real 7.5% (cost 1.161 < demand 1.214): BCR up (+4.6%). All three align with the stored drift rows' signs.
+- Tension with finding 1 sanity: the real-terms cost overrun (+15-25%) and the BCR near-offset (restated 1.88-2.06) are compatible because demand also moved +21% in the same direction. No contradiction.
+
+**Notes for article drafting and for the reviewer:**
+
+- Likely article conclusion. The synthesis with finding 1 is the investigation's richest insight.
+- The band-boundary sensitivity is the specific thing that needs careful framing in any published version: stating "Crossrail moved into the high VFM band" would be overclaiming, because only one of three co-equal scenarios shows the band change, and the change depends on the pre-2014 correction magnitude.
+- Laura's formal review should particularly scrutinise the benefits-linear-in-demand simplification. This is the single largest methodological approximation in the finding. If her judgement is that the simplification is acceptable for a sensitivity-only framing, the finding stands as drafted. If she flags it as too strong an approximation, the finding narrative would need to add language around that specifically.
+- The low-confidence rating is methodological and reflects the sensitivity-only framing; it is the correct rating for the genre of calculation. Not a hedge.
+
+---
+
+## Session close: findings drafting
+
+**Session date:** 2026-04-22.
+
+**Findings inserted:** three, all with `published = false`.
+
+| Finding key | Title | Confidence | Supporting drift rows |
+|---|---|---|---|
+| `cost_real_terms_residual` | Crossrail's real-terms cost overrun is approximately £2.5-3.7bn, smaller than the 28% cash headline | medium | 2 |
+| `revenue_shortfall_decomposition` | Revenue shortfall decomposes: demand down 12%, yield down 28% | medium | 1 |
+| `bcr_near_offset` | Cost overrun and demand over-performance near-offset on value for money | low | 6 |
+
+Supabase `crossrail_retrospective.findings` row count: 3. All three rows carry `published = false`. Publication gate remains closed until the formal reviewer write-up is recorded in `pda_shared.reviews`.
+
+**Drafting discipline observations:**
+
+- Arithmetic discipline caught a framing error on finding 1 before insertion (the "three-quarters explained by construction inflation" formulation was backwards; corrected to "60-90% real, 10-40% inflation"). Recorded as a discipline reminder in the finding 1 entry above and applied to findings 2 and 3. For future findings drafting sessions in any PDA Investigations case, the discipline is: verify the direction of framing against the arithmetic before proposing a headline, not after.
+- Causal-mechanism claims softened on finding 2 ("may reflect pandemic impact ... including possible shifts toward off-peak and leisure travel" rather than asserting the shift). Consistent with the explicit non-assertion of the fare-policy hypothesis in the same paragraph.
+- Tension between findings 1 and 3 framed as consistency-with-different-questions rather than contradiction, following a refinement request by Ant. The two findings measure different things and both are true.
+- Each finding's long-form narrative carries the drift-row IDs by UUID. A reader who wants to reproduce the arithmetic has a direct path from the narrative to the underlying rows in `crossrail_retrospective.drift_calculations`.
+- Word counts: finding 1 ~370 (medium), finding 2 ~378 (medium), finding 3 ~960 (long). All within the Step 3 targets.
+
+**Publication gate status at session close:**
+
+Closed. Three findings sit in `crossrail_retrospective.findings` with `published = false`. Laura's formal methodology write-up is the unblocker; on receipt, a separate (small) unit of work will insert a reviewer row into `pda_shared.reviewers`, a review row into `pda_shared.reviews`, and flip the three findings' `published` flag to true (subject to Laura's review outcome per-finding, since a review that flags any particular finding for revision would pause that finding's publication specifically).
+
+**Session end.**
