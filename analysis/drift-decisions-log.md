@@ -483,3 +483,32 @@ The methodology and the drift calculations produced from it were reviewed on 202
 - Candidate article opener. The contrast with PAC 2021 framing is the narrative hook.
 - The ONS-OPI vs BCIS-TPI caveat is the one most likely to be pressed by a programme-assurance reviewer. The caveats field carries the full position.
 - The range (£2.5bn to £3.7bn) is a real analytical range, not a rhetorical hedge; both rows are co-equal drift calculations with different pre-2014 treatments, not a best-estimate plus sensitivity.
+
+### Finding 2: revenue_shortfall_decomposition
+
+**Drafted:** 2026-04-22.
+**Finding id in Supabase:** `aa83b45e-8945-40b3-b50f-0870e8012045`.
+**Published:** false.
+**Title:** *Revenue shortfall decomposes: demand down 12%, yield down 28%*.
+**Supporting drift rows:** `cf423e0d-cd41-4625-b297-99679e447c7d` (assumption 3 single row, −37.13% revenue drift vs the 2019 TfL Business Plan forecast for 2024/25).
+**Confidence:** medium. Arithmetic exact; direction robust; residual uncertainty in the two caveats (definitional match, pandemic-era components).
+
+**Drafting decisions:**
+
+- **Title kept from Step 3 proposal.** "Revenue shortfall decomposes: demand down 12%, yield down 28%" is specific and directly replicable; the two numbers in the title let a reader match against the finding body without re-computing. No revision flagged.
+- **Multiplicative framing with additive sanity.** The decomposition is stated multiplicatively (demand ratio × yield ratio = revenue ratio) in both the narrative and the magnitude field. An additive cross-check ran before drafting: demand-only effect −£128m, yield-only effect −£293m, interaction +£36m, summing to −£385m. Yield dominance holds on both the ratio comparison (|−28.3%| > |−12.3%|) and the additive share (£293m ≈ 76% of the gap vs £128m ≈ 33%; interaction accounts for the balancing fraction). This cross-check is not in the narrative (multiplicative framing is cleaner for a reader) but is recorded here as part of the arithmetic discipline.
+- **Softened the pandemic causal claim.** First draft asserted that yield per journey was reduced by the pandemic-era shift toward off-peak and leisure travel. Revised at Ant's direction to hedge the claim ("may reflect ... including possible shifts toward off-peak and leisure travel") because the investigation does not directly substantiate the causal mechanism. The revision aligns with the explicit non-assertion of the fare-policy hypothesis elsewhere in the caveats paragraph.
+- **Removed "materially" from paragraph 1.** "Each journey generates materially less revenue" became "each journey generates less revenue". The numbers (£2.68 vs £3.74) carry the claim; the adjective was redundant.
+- **Causal hypothesis disclosed but not asserted.** The yield-dominant split points toward a fare-policy question (Mayoral fare freeze, Elizabeth Line fare structure relative to the Underground). The finding names this as a hypothesis that the investigation does not substantiate and flags it for Laura's review rather than asserting it.
+
+**Arithmetic checks performed before insertion:**
+
+- Multiplicative reconciliation at 10-decimal precision: 0.876775 × 0.717102 = 0.628746, matching 652/1037 = 0.628737 with a residual of 0.0000088 attributable to rounding in the two-decimal-place unit yield values used in the narrative. At the drift row's 6-decimal storage precision, reconciliation is exact.
+- Additive decomposition (sanity): demand-only −£127.8m, yield-only −£293.3m, interaction +£36.1m, sum −£385.0m, matches drift_absolute.
+- Yield dominance on both views: 28.3% > 12.3% in magnitude; 76% > 33% in additive share.
+
+**Notes for article drafting and for the reviewer:**
+
+- Likely second finding in the article, following finding 1 (the cost real-terms residual).
+- The definitional flag on "Passenger income" is the main thing Laura's formal review should verify.
+- The 277m demand figure used in the decomposition is from a source document note, not a loaded observation. A reader reproducing the decomposition from observations alone cannot reconstruct the split without loading TFL-BUSINESS-PLAN-2019-12's demand forecast as an observation (which would require separate extraction from the plan document). This is a known limitation of the current reproducibility path.
